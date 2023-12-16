@@ -5,7 +5,7 @@ import Intro from "../components/intro";
 import BodySeg from "../components/BodySegment";
 import SlidingScale from "../components/SlidingScale";
 import WorkoutCount from "../components/WorkoutCount";
-
+import SubmitButton from "../components/SubmitButton";
 
 const mainScreen = () => {
 
@@ -15,6 +15,7 @@ const mainScreen = () => {
             <Intro/>
             <BodySeg/>
             <WorkoutCount/>
+            <SubmitButton buttonText={"Generate Workout"}/>
             <p>main screen</p>
             {/* <Button buttonText={"back"}/>
             <Button buttonText={"biceps"}/>
