@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Intro from "../components/intro";
 import BodySeg from "../components/BodySegment";
 import SlidingScale from "../components/SlidingScale";
+import WorkoutCount from "../components/WorkoutCount";
 
 
 const mainScreen = () => {
@@ -13,7 +14,7 @@ const mainScreen = () => {
             <Header/>
             <Intro/>
             <BodySeg/>
-            <SlidingScale/>
+            <WorkoutCount/>
             <p>main screen</p>
             {/* <Button buttonText={"back"}/>
             <Button buttonText={"biceps"}/>
