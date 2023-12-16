@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const ButtonStyle = styled.button`
-        background-color: red;
+        background-color: DarkSlateGray;
         color: white;
         border: none;
         border-radius: 6px;

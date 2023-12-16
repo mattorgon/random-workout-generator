@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 const SliderContainer = styled.div`
-    background-color: red;
     flex-wrap: nowrap;
-
     max-width: 600px;
     margin: 20px auto; /* Center the container horizontally */
-    
     justify-content: center;
-    
 `;
 
 const Slider = styled.input`
