@@ -7,6 +7,8 @@ import SlidingScale from "../components/SlidingScale";
 import WorkoutCount from "../components/WorkoutCount";
 import SubmitButton from "../components/SubmitButton";
 import ExerciseCard from "../components/Exercise";
+import ToggleableButton from "../components/ToggleButton";
+import { colors } from "@mui/material";
 
 const mainScreen = () => {
 
@@ -17,8 +19,9 @@ const mainScreen = () => {
             <BodySeg/>
             <WorkoutCount/>
             <SubmitButton buttonText={"Generate Workout"}/>
-            <p>main screen</p>
+            <p>main screennnn</p>
             <ExerciseCard/>
+            <ToggleableButton buttonText={"hi"}/>
             {/* <Button buttonText={"back"}/>
             <Button buttonText={"biceps"}/>
             <Button buttonText={"chest"}/>

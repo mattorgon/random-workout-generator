@@ -1,6 +1,7 @@
 import React from "react";
 import styled from '@emotion/styled';
 import Button from "../components/Button"
+import ToggleableButton from "./ToggleButton";
 
 
 
@@ -34,18 +35,18 @@ const BodySeg = () => {
             {subtitleText}
         </SubtitleStyle>
         <ButtonRowStyle>
-            <Button buttonText={"back"}/>
-            <Button buttonText={"biceps"}/>
-            <Button buttonText={"chest"}/>
-            <Button buttonText={"triceps"}/>
-            <Button buttonText={"legs"}/>
+            <ToggleableButton buttonText={"back"}/>
+            <ToggleableButton buttonText={"biceps"}/>
+            <ToggleableButton buttonText={"chest"}/>
+            <ToggleableButton buttonText={"triceps"}/>
+            <ToggleableButton buttonText={"legs"}/>
         </ButtonRowStyle>
         <ButtonRowStyle>
-            <Button buttonText={"shoulders"}/>
-            <Button buttonText={"core"}/>
-            <Button buttonText={"cardio"}/>
-            <Button buttonText={"push"}/>
-            <Button buttonText={"pull"}/>
+            <ToggleableButton buttonText={"shoulders"}/>
+            <ToggleableButton buttonText={"core"}/>
+            <ToggleableButton buttonText={"cardio"}/>
+            <ToggleableButton buttonText={"push"}/>
+            <ToggleableButton buttonText={"pull"}/>
         </ButtonRowStyle>
 
 
