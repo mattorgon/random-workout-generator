@@ -73,7 +73,112 @@
 // export default ToggleableButton;
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import styled from '@emotion/styled';
+
+// const ToggleableButton = styled.button`
+//   background-color: ${(props) => (props.checked ? 'DarkSlateGray' : 'white')};
+//   color: ${(props) => (props.checked ? 'white' : 'DarkSlateGray')};
+//   border: 2px solid DarkSlateGray;
+//   border-radius: 6px;
+//   padding: 8px;
+//   margin: 4px;
+//   cursor: pointer;
+// `;
+
+// const ToggleableButtonComponent = ({ buttonText }) => {
+//   const [toggledButtons, setToggledButtons] = useState([]);
+
+//   const handleButtonClick = (buttonText) => {
+//     setToggledButtons((prevButtons) => {
+//       if (prevButtons.includes(buttonText)) {
+//         return prevButtons.filter((button) => button !== buttonText);
+//       } else {
+//         return [...prevButtons, buttonText];
+//       }
+      
+//     });
+//   };
+
+//   useEffect(() => {
+//     console.log('Toggled Buttons:', toggledButtons);
+//   }, [toggledButtons]);
+
+//   return (
+//     <>
+//       {/* <div>
+//         {toggledButtons.map((button, index) => (
+//           <span key={index}>{button}</span>
+//         ))}
+//       </div> */}
+//       <ToggleableButton checked={toggledButtons.includes(buttonText)} onClick={() => handleButtonClick(buttonText) }>
+//         {buttonText}
+//       </ToggleableButton>
+//     </>
+//   );
+// };
+
+// export default ToggleableButtonComponent;
+
+
+// import React, { useState, useEffect } from 'react';
+// import styled from '@emotion/styled';
+
+// const ToggleableButton = styled.button`
+//   background-color: ${(props) => (props.checked ? 'DarkSlateGray' : 'white')};
+//   color: ${(props) => (props.checked ? 'white' : 'DarkSlateGray')};
+//   border: 2px solid DarkSlateGray;
+//   border-radius: 6px;
+//   padding: 8px;
+//   margin: 4px;
+//   cursor: pointer;
+// `;
+
+// const DisplayLength = styled.div`
+//   margin-top: 10px;
+//   font-weight: bold;
+// `;
+
+// const ToggleableButtonComponent = ({ buttonText }) => {
+//   const [toggledButtons, setToggledButtons] = useState([]);
+
+//   const handleButtonClick = (buttonText) => {
+//     setToggledButtons((prevButtons) => {
+//       if (prevButtons.includes(buttonText)) {
+//         return prevButtons.filter((button) => button !== buttonText);
+//       } else {
+//         return [...prevButtons, buttonText];
+//       }
+//     });
+//   };
+
+//   useEffect(() => {
+//     console.log('Toggled Buttons:', toggledButtons);
+//   }, [toggledButtons]);
+
+//   return (
+//     <>
+//       {/* <div>
+//         {toggledButtons.map((button, index) => (
+//           <span key={index}>{button}</span>
+//         ))}
+//       </div> */}
+//       <ToggleableButton
+//         checked={toggledButtons.includes(buttonText)}
+//         onClick={() => handleButtonClick(buttonText)}
+//       >
+//         {buttonText}
+//       </ToggleableButton>
+//       <DisplayLength>{`List Length: ${toggledButtons.length}`}</DisplayLength>
+//     </>
+//   );
+// };
+
+// export default ToggleableButtonComponent;
+
+
+// ToggleableButtonComponent.js
+import React from 'react';
 import styled from '@emotion/styled';
 
 const ToggleableButton = styled.button`
@@ -86,37 +191,97 @@ const ToggleableButton = styled.button`
   cursor: pointer;
 `;
 
-const ToggleableButtonComponent = ({ buttonText }) => {
-  const [toggledButtons, setToggledButtons] = useState([]);
-
-  const handleButtonClick = (buttonText) => {
-    setToggledButtons((prevButtons) => {
-      if (prevButtons.includes(buttonText)) {
-        return prevButtons.filter((button) => button !== buttonText);
-      } else {
-        return [...prevButtons, buttonText];
-      }
-      
-    });
-  };
-
-  useEffect(() => {
-    console.log('Toggled Buttons:', toggledButtons);
-  }, [toggledButtons]);
-
+const ToggleableButtonComponent = ({ buttonText, onButtonClick, checked }) => {
   return (
-    <>
-      {/* <div>
-        {toggledButtons.map((button, index) => (
-          <span key={index}>{button}</span>
-        ))}
-      </div> */}
-      <ToggleableButton checked={toggledButtons.includes(buttonText)} onClick={() => handleButtonClick(buttonText) }>
-        {buttonText}
-      </ToggleableButton>
-    </>
+    <ToggleableButton checked={checked} onClick={() => onButtonClick(buttonText)}>
+      {buttonText}
+    </ToggleableButton>
   );
 };
 
 export default ToggleableButtonComponent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import styled from '@emotion/styled';
+
+// const ToggleableButton = styled.button`
+//   background-color: ${(props) => (props.checked ? 'DarkSlateGray' : 'white')};
+//   color: ${(props) => (props.checked ? 'white' : 'DarkSlateGray')};
+//   border: 2px solid DarkSlateGray;
+//   border-radius: 6px;
+//   padding: 8px;
+//   margin: 4px;
+//   cursor: pointer;
+// `;
+
+// const ToggleableButtonList = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+// `;
+
+// let buttonsSelected = [];
+
+// const ToggleableButtonComponent = ({ buttonText }) => {
+//   const [buttons, setButtons] = useState([]);
+
+//   const handleButtonClick = (buttonText) => {
+//     const buttonIndex = buttons.indexOf(buttonText);
+//     if (buttonIndex === -1) {
+//       // Add button to the list if not present
+//       setButtons([...buttons, buttonText]);
+//     } else {
+//       // Remove button from the list if already present
+//       const updatedButtons = [...buttons];
+//       updatedButtons.splice(buttonIndex, 1);
+//       setButtons(updatedButtons);
+//     }
+//   };
+
+//   useEffect(() => {
+//     console.log(buttons)
+//     console.log('Toggled Buttons:', buttons);
+//     }, [buttons]);
+
+
+//   return (
+//     <>
+//       <ToggleableButton checked={buttons.includes(buttonText)} onClick={() => handleButtonClick(buttonText)}>
+//         {buttonText}
+//       </ToggleableButton>
+//     </>
+//   );
+// };
+
+// export default ToggleableButtonComponent;
 
