@@ -6,6 +6,7 @@ const IntroStyle = styled.div`
     width: 100%;
     left: 10px;
     padding: 10px
+    color: #232323;
 `
 
 const Intro = () => {

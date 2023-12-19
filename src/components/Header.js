@@ -2,10 +2,11 @@ import React from "react";
 import styled from '@emotion/styled';
 
 const HeaderStyle = styled.div`
-    background-color: #2D8565;//#008B8B;
+    background-color: #32533D;//#2D8565;//#008B8B;
     width: 100%;
     text-indent: 10px;
-    text-align: left
+    text-align: left;
+    color: white;
 `
 
 const Header = () => {

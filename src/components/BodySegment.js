@@ -68,16 +68,19 @@ const BodySeg = () => {
     const TitleStyle = styled.div`
         font-weight: bold;
         font-size: 20px;
+        color: #32533D
     `
 
     const SubtitleStyle = styled.div`
         display: flex;
         justify-content: center;
+        color: #232323;
+
     `
     const ButtonRowStyle = styled.div`
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 20px;
         justify-content: center;
         margin: 10px;
     `
@@ -99,27 +102,26 @@ const BodySeg = () => {
         <SubtitleStyle>
             {subtitleText}
         </SubtitleStyle>
-        <DisplayLength>{`List Length: ${toggledButtons}`}</DisplayLength>
+        {/* <DisplayLength>{`List Length: ${toggledButtons}`}</DisplayLength> */}
         <ButtonRowStyle>
-            <ToggleableButtonComponent buttonText={"back"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('back')}/>
-            <ToggleableButtonComponent buttonText={"biceps"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('biceps')}/>
-            <ToggleableButtonComponent buttonText={"chest"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('chest')}/>
-            <ToggleableButtonComponent buttonText={"triceps"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('triceps')}/>
-            <ToggleableButtonComponent buttonText={"legs"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('legs')}/>
+            <ToggleableButtonComponent buttonText={"Back"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Back')}/>
+            <ToggleableButtonComponent buttonText={"Biceps"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Biceps')}/>
+            <ToggleableButtonComponent buttonText={"Chest"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Chest')}/>
+            <ToggleableButtonComponent buttonText={"Triceps"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Triceps')}/>
+            <ToggleableButtonComponent buttonText={"Legs"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Legs')}/>
         </ButtonRowStyle>
         <ButtonRowStyle>
-            <ToggleableButtonComponent buttonText={"shoulders"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('shoulders')}/>
-            <ToggleableButtonComponent buttonText={"core"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('core')}/>
-            <ToggleableButtonComponent buttonText={"cardio"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('cardio')}/>
-            <ToggleableButtonComponent buttonText={"push"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('push')}/>
-            <ToggleableButtonComponent buttonText={"pull"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('pull')}/>
+            <ToggleableButtonComponent buttonText={"Shoulders"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Shoulders')}/>
+            <ToggleableButtonComponent buttonText={"Core"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Core')}/>
+            <ToggleableButtonComponent buttonText={"Cardio"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Cardio')}/>
+            <ToggleableButtonComponent buttonText={"Push"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Push')}/>
+            <ToggleableButtonComponent buttonText={"Pull"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('Pull')}/>
         </ButtonRowStyle>
         
         <WorkoutCount onSliderChange={setSliderValue} maxSliderValue={initialSliderValue*2} />
 
         <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
-        <br></br>
-        <Pushup src={pushupMan}/>
+       
             {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises}/>}
             {/* <YourWorkout selectedExercises={selectedExercises} />}
             <SelectedExerciseList selectedExercises={selectedExercises}/> */}

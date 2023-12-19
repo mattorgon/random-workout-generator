@@ -11,11 +11,13 @@ const WorkoutCount = ({ onSliderChange, maxSliderValue }) => {
     const TitleStyle = styled.div`
         font-weight: bold;
         font-size: 20px;
+        color: #32533D
     `
 
     const SubtitleStyle = styled.div`
         display: flex;
         justify-content: center;
+        color: #232323;
     `
 
     return(

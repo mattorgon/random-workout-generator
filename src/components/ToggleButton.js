@@ -189,16 +189,17 @@ const ToggleableButton = styled.button`
   // padding: 8px;
   // margin: 4px;
   // cursor: pointer;
-  background-color: ${(props) => (props.checked ? '#2D8565' : 'white')};
-  color: ${(props) => (props.checked ? 'white' : '#2D8565')};
+  background-color: ${(props) => (props.checked ? '#5B7564' : 'white')};
+  color: ${(props) => (props.checked ? 'white' : '#5B7564')};
   //background: #FFF;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border: none;
+  border: 1px solid #5B7564;
   border-radius: 6px;
+  height: 30px;
   width: 100px;
   cursor: pointer;
   &:hover {
-    background-color: darkgrey;
+    background-color: #F1BA66;
     }
 `;
 
@@ -212,6 +213,40 @@ const ToggleableButtonComponent = ({ buttonText, onButtonClick, checked }) => {
 
 export default ToggleableButtonComponent;
 
+
+// import React from 'react';
+// import styled from '@emotion/styled';
+
+// const ToggleableButton = styled.button`
+//   // background-color: ${(props) => (props.checked ? 'DarkSlateGray' : 'white')};
+//   // color: ${(props) => (props.checked ? 'white' : 'DarkSlateGray')};
+//   // border: 2px solid DarkSlateGray;
+//   // border-radius: 6px;
+//   // padding: 8px;
+//   // margin: 4px;
+//   // cursor: pointer;
+//   background-color: ${(props) => (props.checked ? '#2D8565' : 'white')};
+//   color: ${(props) => (props.checked ? 'white' : '#2D8565')};
+//   //background: #FFF;
+//   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+//   border: none;
+//   border-radius: 6px;
+//   width: 100px;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: darkgrey;
+//     }
+// `;
+
+// const ToggleableButtonComponent = ({ buttonText, onButtonClick, checked }) => {
+//   return (
+//     <ToggleableButton checked={checked} onClick={() => onButtonClick(buttonText)}>
+//       {buttonText}
+//     </ToggleableButton>
+//   );
+// };
+
+// export default ToggleableButtonComponent;
 
 
 
