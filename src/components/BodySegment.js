@@ -7,6 +7,8 @@ import SubmitButton from './SubmitButton';
 import SelectedExerciseList from './SelectedExerciseList';
 import { getRandomExercises } from './SelectedExercises';
 import YourWorkout from './GenerateWorkout';
+import WorkoutCount from './WorkoutCount';
+import pushupMan from '../assets/Pushup man no bkgd.gif'
 
 
 
@@ -20,6 +22,9 @@ const BodySeg = () => {
     let titleText = "Body Segment";
     let subtitleText = "What are we hitting today?"
     let exercises = [];
+    let initialSliderValue = 5;
+
+    const [sliderValue, setSliderValue] = useState(initialSliderValue);
 
     //body segment toggle buttons
     const [toggledButtons, setToggledButtons] = useState([]);
@@ -53,7 +58,8 @@ const BodySeg = () => {
         // // Additional logic if needed
 
         console.log('Button clicked');
-        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, 3);
+        console.log('slider val: ', sliderValue)
+        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue);
         console.log('Exercises:', exercises);
         setSelectedExercises(exercises);
         setSubmitButtonClicked(true);
@@ -75,6 +81,15 @@ const BodySeg = () => {
         justify-content: center;
         margin: 10px;
     `
+
+    const Pushup = styled.img`
+    width: 200px;
+    height: 200px;
+    margin-bottom: 5px; 
+    border: none;
+    border-radius: 10px;
+    `
+
 
     return(
         <>
@@ -99,13 +114,19 @@ const BodySeg = () => {
             <ToggleableButtonComponent buttonText={"push"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('push')}/>
             <ToggleableButtonComponent buttonText={"pull"} onButtonClick={handleButtonClick} checked={toggledButtons.includes('pull')}/>
         </ButtonRowStyle>
+        
+        <WorkoutCount onSliderChange={setSliderValue} maxSliderValue={initialSliderValue*2} />
 
         <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
-            {submitButtonClicked && <YourWorkout selectedExercises={exercises} />}
-
-
+        <br></br>
+        <Pushup src={pushupMan}/>
+            {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises}/>}
+            {/* <YourWorkout selectedExercises={selectedExercises} />}
+            <SelectedExerciseList selectedExercises={selectedExercises}/> */}
+       
 
         </>
+        
     );
 
 

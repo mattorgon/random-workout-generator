@@ -4,7 +4,7 @@ import SlidingScale from "./SlidingScale";
 
 
 
-const WorkoutCount = () => {
+const WorkoutCount = ({ onSliderChange, maxSliderValue }) => {
     let titleText = "Number of Exercises";
     let subtitleText = "How many are we hitting today?"
 
@@ -26,7 +26,10 @@ const WorkoutCount = () => {
         <SubtitleStyle>
             {subtitleText}
         </SubtitleStyle>
-        <SlidingScale/>
+        {/* <SlidingScale onChange={onSliderChange} /> */}
+        {/* <SlidingScale value={initialSliderValue} onChange={handleSliderChange} /> */}
+        <SlidingScale onChange={onSliderChange} value={Math.floor(maxSliderValue / 2)} max={maxSliderValue} />
+
 
 
         </>

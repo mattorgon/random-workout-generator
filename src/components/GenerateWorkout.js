@@ -18,7 +18,7 @@ const YourWorkout = () => {
   return (
     <div>
       {/* Your component code */}
-      <button onClick={handleGenerateExercises}>Generate Exercises</button>
+      {/* <button onClick={handleGenerateExercises}>Generate Exercises</button> */}
       <SelectedExerciseList selectedExercises={selectedExercises} />
     </div>
   );

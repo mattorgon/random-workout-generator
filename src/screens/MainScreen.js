@@ -18,16 +18,10 @@ const mainScreen = () => {
             <Header/>
             <Intro/>
             <BodySeg/>
-            <WorkoutCount/>
-            <SubmitButton buttonText={"Generate Workout"}/>
-            <p>main screennnn</p>
-            <ExerciseCard/>
-            <YourWorkout/>
-            {/* <Button buttonText={"back"}/>
-            <Button buttonText={"biceps"}/>
-            <Button buttonText={"chest"}/>
-            <Button buttonText={"triceps"}/>
-            <Button buttonText={"legs"}/> */}
+            {/* <WorkoutCount/> */}
+            {/* <SubmitButton buttonText={"Generate Workout"}/> */}
+            {/* <p>main screennnn</p>
+            <ExerciseCard exerciseName={'bicep curls'}/> */}
         </>
     )
 }

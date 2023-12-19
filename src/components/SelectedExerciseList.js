@@ -1,8 +1,18 @@
 import React from 'react';
 import ExerciseCard from './Exercise';
+import styled from '@emotion/styled';
 
 const SelectedExerciseList = ({ selectedExercises }) => {
-  
+
+  const ExerciseListStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+`
+
   // Check if selectedExercises is an array
   if (!Array.isArray(selectedExercises)) {
     console.error('Selected exercises is not an array:', selectedExercises);
@@ -10,11 +20,11 @@ const SelectedExerciseList = ({ selectedExercises }) => {
   }
 
   return (
-    <div>
+    <ExerciseListStyle>
       {selectedExercises.map((exercise, index) => (
         <ExerciseCard key={index} exerciseName={exercise} />
       ))}
-    </div>
+    </ExerciseListStyle>
   );
 };
 

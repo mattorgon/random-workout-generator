@@ -43,10 +43,10 @@ const CardContainer = styled.div`
     flex-direction: column;
     align-items: center; /* Vertical alignment */
     margin-bottom: 10px; /* Adjust the margin as needed */
-    background-color: red;
+    // background-color: red;
 `;
 
-const ExerciseCard = () => {
+const ExerciseCard = ({exerciseName}) => {
 
     const [isPressed, setIsPressed] = useState(false);
 
@@ -59,7 +59,7 @@ const ExerciseCard = () => {
   return (
     <CardContainer>
         <ExerciseGif src={exerciseGif} alt="bicep curls"/>
-        <LockButton onClick={handleButtonClick}>bicep curl
+        <LockButton onClick={handleButtonClick}>{exerciseName}
             <LockImg src={isPressed ? lockedImage : unlockedImage} alt={isPressed ? 'unlocked' : 'locked'}/>
         </LockButton>
     </CardContainer>
