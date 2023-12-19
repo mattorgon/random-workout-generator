@@ -9,6 +9,7 @@ import SubmitButton from "../components/SubmitButton";
 import ExerciseCard from "../components/Exercise";
 import ToggleableButton from "../components/ToggleButton";
 import { colors } from "@mui/material";
+import YourWorkout from "../components/GenerateWorkout";
 
 const mainScreen = () => {
 
@@ -21,7 +22,7 @@ const mainScreen = () => {
             <SubmitButton buttonText={"Generate Workout"}/>
             <p>main screennnn</p>
             <ExerciseCard/>
-            <ToggleableButton buttonText={"hi"}/>
+            <YourWorkout/>
             {/* <Button buttonText={"back"}/>
             <Button buttonText={"biceps"}/>
             <Button buttonText={"chest"}/>

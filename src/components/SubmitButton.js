@@ -13,12 +13,12 @@ const SubmitButtonStyle = styled.button`
         }
     `
 
-const SubmitButton = ({buttonText}) => {
+const SubmitButton = ({buttonText, onButtonClick }) => {
 
     
 
   return (
-    <SubmitButtonStyle>
+    <SubmitButtonStyle onClick={onButtonClick}>
       {buttonText}
     </SubmitButtonStyle>
   );
