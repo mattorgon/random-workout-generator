@@ -9,11 +9,12 @@ const LockButton = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: DarkSlateGray;
+    background-color: #32533D;
     color: white;
     border: none;
     border-radius: 6px;
     width: 100px;
+    height: 40px;
     cursor: pointer;
     &:hover {
         background-color: darkred;
@@ -46,15 +47,39 @@ const CardContainer = styled.div`
     // background-color: red;
 `;
 
-const ExerciseCard = ({exerciseName}) => {
+const ExerciseCard = ({exerciseName, onToggleLock}) => {
 
     const [isPressed, setIsPressed] = useState(false);
 
-    const handleButtonClick = () => {
-        setIsPressed(!isPressed);
-    };
+    //exercises locked in
+    //const [lockedExercises, setLockedExercises] = useState([]);
 
+    // const handleButtonClick = () => {
+    //     console.log(isPressed);
+    //     setIsPressed((prevState) => {
+    //         const newState = !prevState;
+    //         console.log('New state:', newState);
+    //         onToggleLock(exerciseName, newState);
+    //         console.log('onToggleLock called');
+    //         return newState;
+    //     });
+    //     console.log(isPressed);
+    const handleButtonClick = () => {
+        console.log('Before setIsPressed:', isPressed);
+        setIsPressed(!isPressed);
+        console.log('After setIsPressed:', isPressed);
+        onToggleLock(exerciseName, isPressed);
+    };
     
+    
+
+        // console.log("handlebuttonclick fired");
+        // setIsPressed(!isPressed);
+        // console.log(isPressed);
+        // onToggleLock(exerciseName, isPressed);
+
+        // console.log('isPressed:', isPressed); // Log to check the value of isPressed
+    // };
 
   return (
     <CardContainer>

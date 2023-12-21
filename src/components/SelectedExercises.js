@@ -22,11 +22,18 @@ import workoutData from '../data/workoutData.json';
   };
   
   
-  export const getRandomExercises = (bodySegments, count) => {
+  export const getRandomExercises = (bodySegments, count, lockedExercises) => {
     const selectedExercises = [];
+    //let lockedExercises = [];//["Deadlifts", "Pull-ups"];
   
     for (let i = 0; i < count; i++) {
-      const selectedExercise = getRandomExercise(bodySegments);
+      let selectedExercise = getRandomExercise(bodySegments);
+      // if(lockedExercises.includes(selectedExercise)){
+      //   continue;
+      
+      while(lockedExercises.includes(selectedExercise)){
+        selectedExercise = getRandomExercise(bodySegments);
+      }
       if (selectedExercise !== null) {
         selectedExercises.push(selectedExercise);
       } else {

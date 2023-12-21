@@ -166,7 +166,6 @@ const ScaleValue = styled.span`
 const SlidingScale = ({ value: propValue, onChange, max }) => {
   
   const [sliderValue, setSliderValue] = useState(propValue);
-  console.log(sliderValue)
   const handleSliderChange = (event) => {
     // setSliderValue(event.target.value);
     // onChange(event.target.value);

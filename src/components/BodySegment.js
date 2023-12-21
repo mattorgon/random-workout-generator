@@ -35,6 +35,9 @@ const BodySeg = () => {
     //submit button
     const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
 
+    //exercises locked in
+    const [lockedExercises, setLockedExercises] = useState([]);
+
     const handleButtonClick = (buttonText) => {
         setToggledButtons((prevButtons) => {
         if (prevButtons.includes(buttonText)) {
@@ -59,11 +62,19 @@ const BodySeg = () => {
 
         console.log('Button clicked');
         console.log('slider val: ', sliderValue)
-        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue);
+        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue, lockedExercises);
         console.log('Exercises:', exercises);
         setSelectedExercises(exercises);
         setSubmitButtonClicked(true);
     };
+
+    const handleLock = (exerciseName, isLocked) => {
+        if (isLocked) {
+          setLockedExercises((prevLocked) => [...prevLocked, exerciseName]);
+        } else {
+          setLockedExercises((prevLocked) => prevLocked.filter((exercise) => exercise !== exerciseName));
+        }
+      };
 
     const TitleStyle = styled.div`
         font-weight: bold;
@@ -86,11 +97,11 @@ const BodySeg = () => {
     `
 
     const Pushup = styled.img`
-    width: 200px;
-    height: 200px;
-    margin-bottom: 5px; 
-    border: none;
-    border-radius: 10px;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 5px; 
+        border: none;
+        border-radius: 10px;
     `
 
 
@@ -122,7 +133,7 @@ const BodySeg = () => {
 
         <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
        
-            {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises}/>}
+            {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises} handleToggleLock={handleLock}/>}
             {/* <YourWorkout selectedExercises={selectedExercises} />}
             <SelectedExerciseList selectedExercises={selectedExercises}/> */}
        
