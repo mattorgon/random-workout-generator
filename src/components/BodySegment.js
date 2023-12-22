@@ -23,6 +23,7 @@ const BodySeg = () => {
     let subtitleText = "What are we hitting today?"
     let exercises = [];
     let initialSliderValue = 5;
+    let locked = [];
 
     const [sliderValue, setSliderValue] = useState(initialSliderValue);
 
@@ -34,6 +35,9 @@ const BodySeg = () => {
 
     //submit button
     const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+
+    //exercises locked in
+    const [lockedExercises, setLockedExercises] = useState([]);
 
     const handleButtonClick = (buttonText) => {
         setToggledButtons((prevButtons) => {
@@ -59,11 +63,19 @@ const BodySeg = () => {
 
         console.log('Button clicked');
         console.log('slider val: ', sliderValue)
-        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue);
+        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue, lockedExercises);
         console.log('Exercises:', exercises);
         setSelectedExercises(exercises);
         setSubmitButtonClicked(true);
     };
+
+    const handleLock = (exerciseName, isLocked) => {
+        if (isLocked) {
+          setLockedExercises((prevLocked) => [...prevLocked, exerciseName]);
+        } else {
+          setLockedExercises((prevLocked) => prevLocked.filter((exercise) => exercise !== exerciseName));
+        }
+      };
 
     const TitleStyle = styled.div`
         font-weight: bold;
@@ -122,7 +134,7 @@ const BodySeg = () => {
 
         <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
        
-            {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises}/>}
+            {submitButtonClicked && <SelectedExerciseList selectedExercises={selectedExercises} handleToggleLock={handleLock}/>}
             {/* <YourWorkout selectedExercises={selectedExercises} />}
             <SelectedExerciseList selectedExercises={selectedExercises}/> */}
        

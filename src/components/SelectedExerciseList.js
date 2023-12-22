@@ -2,7 +2,7 @@ import React from 'react';
 import ExerciseCard from './Exercise';
 import styled from '@emotion/styled';
 
-const SelectedExerciseList = ({ selectedExercises }) => {
+const SelectedExerciseList = ({ selectedExercises, handleToggleLock }) => {
 
   const ExerciseListStyle = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const SelectedExerciseList = ({ selectedExercises }) => {
   return (
     <ExerciseListStyle>
       {selectedExercises.map((exercise, index) => (
-        <ExerciseCard key={index} exerciseName={exercise} />
+        <ExerciseCard key={index} exerciseName={exercise} onToggleLock={handleToggleLock} />
       ))}
     </ExerciseListStyle>
   );

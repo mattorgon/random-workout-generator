@@ -46,7 +46,7 @@ const CardContainer = styled.div`
     // background-color: red;
 `;
 
-const ExerciseCard = ({exerciseName}) => {
+const ExerciseCard = ({exerciseName, onToggleLock}) => {
 
     const [isPressed, setIsPressed] = useState(false);
 
@@ -60,6 +60,7 @@ const ExerciseCard = ({exerciseName}) => {
     useEffect(() => {
         // This will run every time isPressed changes
         console.log('Effect triggered. Current value of isPressed:', isPressed);
+        onToggleLock(exerciseName, isPressed);
       }, [isPressed]);
       
     
