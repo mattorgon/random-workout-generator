@@ -19,7 +19,7 @@ import workoutData from '../data/workoutData.json';
     const selectedExercise = exercises[randomIndex];
   
     // Remove the selected exercise to avoid repeats
-    exercises.splice(randomIndex, 1);
+    //exercises.splice(randomIndex, 1);
   
     return selectedExercise;
   };
@@ -30,6 +30,10 @@ import workoutData from '../data/workoutData.json';
   
     for (let i = 0; i < count; i++) {
       const selectedExercise = getRandomExercise(bodySegments);
+      if(selectedExercises.includes(selectedExercise)){
+        i--;
+        continue;
+      }
       if (selectedExercise !== null) {
         selectedExercises.push(selectedExercise);
       } else {
