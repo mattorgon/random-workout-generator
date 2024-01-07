@@ -45,6 +45,8 @@ const BodySeg = () => {
         });
     };
 
+    
+
     const handleFormSubmit = () => {
         // console.log('Button clicked');
         // //const { selectedExercises: exercises, updatedBodySegments } = getRandomExercises(toggledButtons, 3);

@@ -6,6 +6,9 @@ import workoutData from '../data/workoutData.json';
     const exercises = bodySegments
       .flatMap(segment => workoutData.exercises?.[segment] || [])
       .filter(exercise => exercise);
+
+
+      console.log('exercises:', exercises);
   
     if (exercises.length === 0) {
       console.log("No exercises found for the selected body segments.");
@@ -36,6 +39,81 @@ import workoutData from '../data/workoutData.json';
     }
   
     return { selectedExercises};    //, updatedBodySegments: bodySegments };
+  };
+
+
+
+
+//no
+  // const getRandomExercise = (bodySegments) => {
+  //   const exercises = bodySegments
+  //     .flatMap(segment => workoutData.exercises?.[segment] || [])
+  //     .filter(exercise => exercise);
+  
+  //   if (exercises.length === 0) {
+  //     console.log("No exercises found for the selected body segments.");
+  //     return null;
+  //   }
+  
+  //   const randomIndex = Math.floor(Math.random() * exercises.length);
+  //   const selectedExercise = exercises[randomIndex];
+  
+  //   return selectedExercise;
+  // };
+  
+  // export const getRandomExercises = (bodySegments, count) => {
+  //   const selectedExercises = [];
+  //   const availableExercises = [...bodySegments]; // Create a copy of the array
+  
+  //   for (let i = 0; i < count && availableExercises.length > 0; i++) {
+  //     const selectedExercise = getRandomExercise(availableExercises);
+  //     if (selectedExercise !== null) {
+  //       selectedExercises.push(selectedExercise);
+  
+  //       // Remove the selected exercise from the availableExercises array
+  //       const exerciseIndex = availableExercises.indexOf(selectedExercise);
+  //       availableExercises.splice(exerciseIndex, 1);
+  //     } else {
+  //       // No more exercises available
+  //       break;
+  //     }
+  //   }
+  
+  //   return { selectedExercises };
+  //};
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  export const getLockedExercises = () => {
+    // const selectedExercises = [];
+  
+    // for (let i = 0; i < count; i++) {
+    //   const selectedExercise = getRandomExercise(bodySegments);
+    //   if (selectedExercise !== null) {
+    //     selectedExercises.push(selectedExercise);
+    //   } else {
+    //     // No more exercises available
+    //     break;
+    //   }
+    // }
+  
+    // return { selectedExercises};    //, updatedBodySegments: bodySegments };
   };
   
   // // Example usage
