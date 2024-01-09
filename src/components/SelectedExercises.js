@@ -25,21 +25,29 @@ import workoutData from '../data/workoutData.json';
   };
   
   
-  export const getRandomExercises = (bodySegments, count) => {
+  export const getRandomExercises = (bodySegments, count, lockedList) => {
     const selectedExercises = [];
-  
+    
     for (let i = 0; i < count; i++) {
-      const selectedExercise = getRandomExercise(bodySegments);
-      if(selectedExercises.includes(selectedExercise)){
-        i--;
-        continue;
-      }
-      if (selectedExercise !== null) {
-        selectedExercises.push(selectedExercise);
+      let e = lockedList.find(lock => lock.index === i)
+      
+      if(e === undefined){
+        const selectedExercise = getRandomExercise(bodySegments);
+        const isExerciseInLockedList = lockedList.some(lock => lock.exercise === selectedExercise);
+        if(selectedExercises.includes(selectedExercise) || isExerciseInLockedList){
+          i--;
+          continue;
+        }
+        if (selectedExercise !== null) {
+          selectedExercises.push(selectedExercise);
+        } else {
+          // No more exercises available
+          break;
+        }
       } else {
-        // No more exercises available
-        break;
+        selectedExercises.push(e.exercise);
       }
+      
     }
   
     return { selectedExercises};    //, updatedBodySegments: bodySegments };

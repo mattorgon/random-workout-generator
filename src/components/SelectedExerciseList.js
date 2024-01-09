@@ -30,9 +30,10 @@ const SelectedExerciseList = ({ selectedExercises }) => {
    // console.log('Before setIsPressed:', isPressed);
     setToggledLock((prevLock) => {
         if (prevLock.includes(buttonText)) {
-            return prevLock.filter((lock) => lock !== buttonText);
+            return prevLock.filter((lock) => lock.exercise !== buttonText);
         } else {
-            return [...prevLock, buttonText];
+            const index = selectedExercises.indexOf(buttonText);
+            return [...prevLock, { exercise: buttonText, index }];
         }
         });
   // setLockedExercise(exerciseName, isPressed);
@@ -56,7 +57,7 @@ const SelectedExerciseList = ({ selectedExercises }) => {
   return (
     <ExerciseListStyle>
       {selectedExercises.map((exercise, index) => (
-        <ExerciseCard key={index} exerciseName={exercise} onButtonLock={handleButtonLock} checked={toggledLock.includes(exercise)} />
+        <ExerciseCard key={index} exerciseName={exercise} onButtonLock={handleButtonLock} checked={toggledLock.some(lock => lock.exercise === exercise)} />
       ))}
     </ExerciseListStyle>
   );

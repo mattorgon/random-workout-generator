@@ -64,7 +64,7 @@ const BodySeg = () => {
         console.log('slider val: ', sliderValue)
         const locked = getLockedExercises();
         console.log('these are locked', locked);
-        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue);
+        const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue, locked);
         console.log('Exercises:', exercises);
         setSelectedExercises(exercises);
         setSubmitButtonClicked(true);
