@@ -9,6 +9,7 @@ import { getRandomExercises } from './SelectedExercises';
 import YourWorkout from './GenerateWorkout';
 import WorkoutCount from './WorkoutCount';
 import pushupMan from '../assets/Pushup man no bkgd.gif'
+import { getLockedExercises } from './SelectedExerciseList';
 
 
 
@@ -61,6 +62,8 @@ const BodySeg = () => {
 
         console.log('Button clicked');
         console.log('slider val: ', sliderValue)
+        const locked = getLockedExercises();
+        console.log('these are locked', locked);
         const { selectedExercises: exercises } = getRandomExercises(toggledButtons, sliderValue);
         console.log('Exercises:', exercises);
         setSelectedExercises(exercises);

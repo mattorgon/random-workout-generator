@@ -2,6 +2,16 @@ import React, {useState, useEffect} from 'react';
 import ExerciseCard from './Exercise';
 import styled from '@emotion/styled';
 
+let lockedExercises = [];
+
+export const getLockedExercises = () => {
+  return lockedExercises;
+}
+
+const setLockedExercises = (locked) => {
+  lockedExercises = locked;
+}
+
 const SelectedExerciseList = ({ selectedExercises }) => {
 
   //exercise toggle lock buttons
@@ -18,8 +28,6 @@ const SelectedExerciseList = ({ selectedExercises }) => {
 
   const handleButtonLock = (buttonText) => {
    // console.log('Before setIsPressed:', isPressed);
-    
-   
     setToggledLock((prevLock) => {
         if (prevLock.includes(buttonText)) {
             return prevLock.filter((lock) => lock !== buttonText);
@@ -34,7 +42,10 @@ const SelectedExerciseList = ({ selectedExercises }) => {
   useEffect(() => {
    // console.log('After setIsPressed:', isPressed);
     console.log('Locked Exercises:', toggledLock);
+    setLockedExercises(toggledLock);
 }, [toggledLock]); // Log values when isPressed or toggledLock change
+
+
 
   // Check if selectedExercises is an array
   if (!Array.isArray(selectedExercises)) {
