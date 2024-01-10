@@ -9,6 +9,7 @@ export const getLockedExercises = () => {
 }
 
 const setLockedExercises = (locked) => {
+  lockedExercises = [];
   lockedExercises = locked;
 }
 
@@ -29,7 +30,7 @@ const SelectedExerciseList = ({ selectedExercises }) => {
   const handleButtonLock = (buttonText) => {
    // console.log('Before setIsPressed:', isPressed);
     setToggledLock((prevLock) => {
-        if (prevLock.includes(buttonText)) {
+        if (prevLock.some(lock => lock.exercise === buttonText)){//(prevLock.includes(buttonText)) {
             return prevLock.filter((lock) => lock.exercise !== buttonText);
         } else {
             const index = selectedExercises.indexOf(buttonText);
