@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import exerciseGif from '../assets/Bicep-Curl-1gif.gif'
 import lockedImage from '../assets/illustration-of-lock-icon-vector.jpg'
@@ -16,10 +16,14 @@ const LockButton = styled.button`
     border: none;
     border-radius: 6px;
     width: 100px;
+    height: 30px;
     cursor: pointer;
     &:hover {
         background-color: darkred;
     }
+
+    /* Dynamic font size based on text length */
+    font-size: ${(props) => props.fontSize}px;
 `
 
 const ExerciseGif = styled.img`
@@ -36,7 +40,10 @@ const LockImg = styled.img`
     height: 10px;
     border: solid;
     border-radius: 10px;
+    margin-left: 5px;
+    //margin-right: 5px;
     justify-content: center;
+    position: absolute
     background-color: ${(props) => (props.checked ? '#5B7564' : 'white')};
 
 `
@@ -71,6 +78,57 @@ export const getLockedExercises = (lockExercises) => {
 const ExerciseCard = ({exerciseName, onButtonLock, checked, onToggleLock}) => {
 
     const [isPressed, setIsPressed] = useState(false);
+
+    const [fontSize, setFontSize] = useState(12);
+
+    const buttonRef = useRef();
+
+    const handleLockButtonClick = () => {
+        onButtonLock(exerciseName);
+        console.log('Effect triggered. Current value of isPressed:', isPressed);
+       // setIsPressed(prevState => !prevState);
+        setIsPressed(!isPressed);
+        // Call your other function here
+      };
+
+    useEffect(() => {
+        console.log('After setIsPressed:', isPressed);
+    }, [isPressed]); // Log values when isPressed or toggledLock change
+
+    // useEffect(() => {
+    //     // Update font size based on text length
+    //     const textLength = buttonRef.current.scrollWidth;
+    //     setFontSize(Math.min(16, Math.max(10, 200 / textLength))); // Adjust the formula as needed
+    // }, [exerciseName]);
+    useEffect(() => {
+        console.log(exerciseName, buttonRef.current.scrollWidth, buttonRef.current.scrollHeight)
+        const textLength = buttonRef.current.scrollWidth; //exerciseName.length;//
+        const textHeight = buttonRef.current.scrollHeight;
+        const maxWidth = 90; // You can adjust this value based on your requirements
+        const maxHeight = 30;
+        const scaleFactor = maxWidth / textLength;
+        const heightScale = maxHeight / textHeight;
+        const adjustedFontSize = Math.floor(fontSize * scaleFactor);
+        //setFontSize(adjustedFontSize);
+        setFontSize(Math.min(12,  Math.min(adjustedFontSize, (fontSize * heightScale))));
+    }, [exerciseName]);
+    
+
+  return (
+    <CardContainer>
+        <ExerciseGif src={exerciseGif} alt="bicep curls"/>
+        <LockButton onClick={handleLockButtonClick} checked={checked} fontSize={fontSize} ref={buttonRef}>
+            {exerciseName}
+            <LockImg src={checked ? lockedImage : unlockedImage} alt={checked ? 'unlocked' : 'locked'} checked={checked}/>
+        </LockButton>
+    </CardContainer>
+  );
+}
+
+export default ExerciseCard;
+
+
+
 
     // //body segment toggle buttons
     // const [toggledLock, setToggledLock] = useState([]);
@@ -122,32 +180,3 @@ const ExerciseCard = ({exerciseName, onButtonLock, checked, onToggleLock}) => {
       
     //onClick={() => onButtonClick(buttonText)}
 
-    const handleLockButtonClick = () => {
-        onButtonLock(exerciseName);
-        console.log('Effect triggered. Current value of isPressed:', isPressed);
-       // setIsPressed(prevState => !prevState);
-        setIsPressed(!isPressed);
-        // Call your other function here
-      };
-
-      useEffect(() => {
-            console.log('After setIsPressed:', isPressed);
-        }, [isPressed]); // Log values when isPressed or toggledLock change
-
-  return (
-    <CardContainer>
-        <ExerciseGif src={exerciseGif} alt="bicep curls"/>
-        {/* <LockButton onClick={handleButtonClick}>{exerciseName} */}
-        {/* <LockButton onClick={() => {
-            onButtonLock(exerciseName);
-            setIsPressed(prevState => !prevState);
-            }}> */}
-                <LockButton onClick={handleLockButtonClick} checked={checked}>
-                {exerciseName}
-            <LockImg src={checked ? lockedImage : unlockedImage} alt={checked ? 'unlocked' : 'locked'} checked={checked}/>
-        </LockButton>
-    </CardContainer>
-  );
-}
-
-export default ExerciseCard;
