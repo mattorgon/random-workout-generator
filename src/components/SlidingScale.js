@@ -11,12 +11,39 @@ const SliderContainer = styled.div`
 `;
 
 const Slider = styled.input`
-  display: flex;
-  width: 100%;
-  height: 100%;
+  // display: flex;
+  // width: 100%;
+  // height: 4px;
 
+  width: 100%;
+  height: 4px; /* Set the height to make the bar thinner */
+  appearance: none; /* Remove default styles */
+  border-radius: 2px;
+  background-color: ${(props) =>
+    props.darkMode
+      ? darkModeStyles.slider.backgroundColor
+      : lightModeStyles.slider.backgroundColor};
+  outline: none; /* Remove default focus style */
+
+  // &::-webkit-slider-thumb {
+  //   z-index: -1; /* Make sure the thumb is above the vertical hash marks */
+  // }
   &::-webkit-slider-thumb {
-    z-index: -1; /* Make sure the thumb is above the vertical hash marks */
+    appearance: none;
+    width: 20px; /* Set the width of the thumb (circle) */
+    height: 20px; /* Set the height of the thumb (circle) */
+    background-color: ${(props) =>
+      props.darkMode
+        ? darkModeStyles.slider.thumb.backgroundColor
+        : lightModeStyles.slider.thumb.backgroundColor};
+    border: 2px solid
+      ${(props) =>
+        props.darkMode
+          ? darkModeStyles.slider.thumb.border
+          : lightModeStyles.slider.thumb.border};
+    border-radius: 50%; /* Make it a circle */
+    cursor: pointer;
+    transition: background 0.3s, border 0.3s;
   }
 `;
 
@@ -52,6 +79,7 @@ const SlidingScale = ({ value: propValue, onChange, max }) => {
         max={max}
         value={sliderValue}
         onChange={handleSliderChange}
+        darkMode={darkMode}
       />
       <ScaleValue>{sliderValue}</ScaleValue>
     </SliderContainer>

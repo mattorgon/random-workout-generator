@@ -5,6 +5,14 @@ const styles = {
 export const lightModeStyles = {
   backgroundColor: "white",
   color: "black",
+  header: {
+    backgroundColor: "#32533D",
+    color: "#F8F0E3",
+  },
+  mainScreen: {
+    backgroundColor: "white",
+    color: "white",
+  },
   toggleButton: {
     checked_backgroundColor: "#32533DCC",
     checked_color: "white",
@@ -23,6 +31,19 @@ export const lightModeStyles = {
   exerciseGif: {
     border_radius: "10px",
     border: "solid",
+  },
+  slider: {
+    backgroundColor: "#32533D",
+    thumb: {
+      backgroundColor: "#F1BA66",
+      border: "#32533D",
+    },
+    hashMark: {
+      color: "#32533D",
+    },
+  },
+  titleText: {
+    color: "#32533D",
   },
 };
 
@@ -57,5 +78,18 @@ export const darkModeStyles = {
   exerciseGif: {
     border_radius: "10px",
     border: "2px solid #F1BA66",
+  },
+  slider: {
+    backgroundColor: "#F8F0E3",
+    thumb: {
+      backgroundColor: "#F1BA66",
+      border: "#F8F0E3",
+    },
+    hashMark: {
+      color: "#F8F0E3",
+    },
+  },
+  titleText: {
+    color: "#F8F0E3",
   },
 };

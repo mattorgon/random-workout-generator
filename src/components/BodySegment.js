@@ -78,12 +78,19 @@ const BodySeg = () => {
     font-weight: bold;
     font-size: 20px;
     //color: #32533D
-    background-color: ${(props) =>
-      props.darkMode
-        ? darkModeStyles.mainScreen.backgroundColor
-        : lightModeStyles.backgroundColor};
+    background-color: rgba(0, 0, 0, 0);
+
     color: ${(props) =>
-      props.darkMode ? darkModeStyles.mainScreen.color : lightModeStyles.color};
+      props.darkMode
+        ? darkModeStyles.titleText.color
+        : lightModeStyles.titleText.color};
+    display: inline;
+    z-index: 2;
+    position: relative;
+
+    line-height: 0; /* Adjust line-height to remove gap */
+    margin-bottom: 0; /* Reset margin-bottom */
+    padding: 0; /* Reset padding */
   `;
 
   const SubtitleStyle = styled.div`
@@ -121,9 +128,43 @@ const BodySeg = () => {
     border-radius: 10px;
   `;
 
+  const TitleWrapper = styled.div`
+    position: relative;
+  `;
+
+  //   const Underline = styled.div`
+  //     //position: absolute;
+  //     bottom: 0;
+  //     left: 0;
+  //     width: 20%;
+  //     height: 8px; /* Adjust the height of the underline */
+  //     background-color: #f1ba66; /* Adjust the color of the underline */
+  //     justify-content: center;
+  //   `;
+
+  const Underline = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border-radius: 1.5px;
+    transform: translateX(-50%); /* Center the underline */
+    width: 250px; /* Set the width of the underline */
+    height: 3px; /* Adjust the height of the underline */
+    background-color: #f1ba66; /* Adjust the color of the underline */
+    z-index: 1;
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+    margin-bottom: 1px; /* Reset margin-bottom */
+    line-height: 0;
+  `;
+
   return (
     <>
-      <TitleStyle darkMode={darkMode}>{titleText}</TitleStyle>
+      <TitleWrapper>
+        <TitleStyle darkMode={darkMode}>{titleText}</TitleStyle>
+        <Underline />
+      </TitleWrapper>
+
       <SubtitleStyle darkMode={darkMode}>{subtitleText}</SubtitleStyle>
       {/* <DisplayLength>{`List Length: ${toggledButtons}`}</DisplayLength> */}
       <ButtonRowStyle darkMode={darkMode}>

@@ -16,9 +16,13 @@ const HeaderStyle = styled.div`
 
   /* Dynamic styles based on darkMode state */
   background-color: ${(props) =>
-    props.darkMode ? darkModeStyles.header.backgroundColor : "#32533D"};
+    props.darkMode
+      ? darkModeStyles.header.backgroundColor
+      : lightModeStyles.header.backgroundColor}; //"#32533D"};
   color: ${(props) =>
-    props.darkMode ? darkModeStyles.header.color : lightModeStyles.color};
+    props.darkMode
+      ? darkModeStyles.header.color
+      : lightModeStyles.header.color};
 `;
 
 const Header = () => {

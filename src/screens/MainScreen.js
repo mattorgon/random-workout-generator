@@ -17,6 +17,7 @@ import styled from "@emotion/styled";
 const ScreenSyle = styled.div`
     display: flex
     width: 100%;
+    height: 100%;
     left: 10px;
     //color: #232323;
     color: '#5B7564';
