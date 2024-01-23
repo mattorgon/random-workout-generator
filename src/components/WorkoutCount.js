@@ -43,17 +43,18 @@ const Underline = styled.div`
   border-radius: 1.5px;
   transform: translateX(-50%); /* Center the underline */
   width: 250px; /* Set the width of the underline */
-  height: 3px; /* Adjust the height of the underline */
+  height: 2px; /* Adjust the height of the underline */
   background-color: #f1ba66; /* Adjust the color of the underline */
   z-index: 1;
   margin: 0; /* Reset margin */
   padding: 0; /* Reset padding */
-  margin-bottom: 1px; /* Reset margin-bottom */
+  margin-bottom: 2px; /* Reset margin-bottom */
   line-height: 0;
 `;
 
 const TitleWrapper = styled.div`
   position: relative;
+  z-index: 0;
 `;
 const WorkoutCount = ({ onSliderChange, maxSliderValue }) => {
   const { darkMode } = useDarkMode();
