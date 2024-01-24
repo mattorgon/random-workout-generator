@@ -140,10 +140,33 @@ const SignMeUp = ({ formData, setFormData }) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to the backend for user registration
-    // You can use a fetch or axios to make an API call to your server
+
+    // Make a POST request to the registration endpoint
+    try {
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(response);
+
+      if (response.ok) {
+        // Registration successful
+        const data = await response.json();
+        console.log("User registered:", data);
+        // Optionally, you can perform additional actions like redirecting the user
+      } else {
+        // Registration failed
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
   };
 
   // useEffect(() => {
