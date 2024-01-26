@@ -1,80 +1,13 @@
-// import React from "react";
-// import styled from "@emotion/styled";
-// import { useDarkMode } from "../context/DarkModeProvider";
-// import { darkModeStyles, lightModeStyles } from "../styles";
-// import DarkToggleSwitch from "./DarkToggleSwitch";
-
-// const HeaderStyle = styled.div`
-//   //background-color: #32533D;//#2D8565;//#008B8B;
-//   display: flex;
-//   width: 100%;
-//   text-indent: 10px;
-//   text-align: left;
-//   //justify-content: space-between;
-
-//   //color: white;
-
-//   /* Dynamic styles based on darkMode state */
-//   background-color: ${(props) =>
-//     props.darkMode
-//       ? darkModeStyles.header.backgroundColor
-//       : lightModeStyles.header.backgroundColor}; //"#32533D"};
-//   color: ${(props) =>
-//     props.darkMode
-//       ? darkModeStyles.header.color
-//       : lightModeStyles.header.color};
-// `;
-
-// const Underline = styled.div`
-//   position: absolute;
-//   bottom: 0;
-//   //left: 50%;
-//   border-radius: 1.5px;
-//   //transform: translateX(-50%); /* Center the underline */
-//   width: 250px; /* Set the width of the underline */
-//   height: 3px; /* Adjust the height of the underline */
-//   background-color: #f1ba66; /* Adjust the color of the underline */
-//   z-index: 1;
-//   margin: 0; /* Reset margin */
-//   padding: 0; /* Reset padding */
-//   margin-bottom: 1px; /* Reset margin-bottom */
-//   line-height: 0;
-//   margin-right: 40px;
-// `;
-
-// const TitleWrapper = styled.div`
-//   position: relative;
-// `;
-
-// const Header = () => {
-//   let title = "I Pick, U Lift";
-
-//   const { darkMode, toggleDarkMode } = useDarkMode();
-
-//   return (
-//     <>
-//       <TitleWrapper>
-//         <HeaderStyle darkMode={darkMode}>
-//           {/* <p>{title}</p> */}
-//           {title}
-//           {/* <DarkToggleSwitch onClick={toggleDarkMode}/> */}
-//           <Underline />
-//           <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
-//         </HeaderStyle>
-//       </TitleWrapper>
-//     </>
-//   );
-// };
-
-// export default Header;
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
 import { darkModeStyles, lightModeStyles } from "../styles";
 import DarkToggleSwitch from "./DarkToggleSwitch";
 import SignMeUp from "./SignMeUp";
 import SignUpButton from "./SignUpButton";
+import LoginButton from "./LoginButton";
+import { useAuth } from "../context/AuthContext";
+import UserMenuModal from "./UserMenuModal";
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -163,10 +96,30 @@ const TitleStyle = styled.div`
   padding: 0px; /* Reset padding */
   margin-top: 10px;
 `;
+
+const SignedIn = styled.div`
+  background-color: red;
+`;
 const Header = () => {
   let title = "I Pick, U Lift";
 
+  const { isSignedIn, username, signOut } = useAuth();
+
   const { darkMode, toggleDarkMode } = useDarkMode();
+
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const openUserMenu = () => {
+    setIsUserMenuOpen(true);
+  };
+
+  const closeUserMenu = () => {
+    setIsUserMenuOpen(false);
+  };
+
+  useEffect(() => {
+    console.log("username: ", username);
+  }, [isSignedIn]);
 
   return (
     <HeaderStyle darkMode={darkMode}>
@@ -179,7 +132,20 @@ const Header = () => {
       <Button darkMode={darkMode} onClick={toggleDarkMode}>
         Toggle Dark Mode
       </Button>
-      <SignUpButton />
+      {isSignedIn ? (
+        <>
+          Welcome,{" "}
+          <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
+            {username}
+          </span>
+          <UserMenuModal isOpen={isUserMenuOpen} onClose={closeUserMenu} />
+        </>
+      ) : (
+        <div>
+          <LoginButton />
+          <SignUpButton />
+        </div>
+      )}
     </HeaderStyle>
   );
 };

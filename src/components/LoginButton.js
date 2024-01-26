@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Modal from "react-modal";
-import SignMeUp from "./SignMeUp";
+import LogMeIn from "./LogMeIn";
 
-const SignUpButtonStyled = styled.button`
+const LoginButtonStyled = styled.button`
   background-color: #3498db;
   color: #fff;
   padding: 10px;
@@ -18,7 +18,7 @@ const ModalContent = styled.div`
   width: 50%;
 `;
 
-const SignUpButton = () => {
+const LoginButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -55,15 +55,15 @@ const SignUpButton = () => {
 
   return (
     <>
-      <SignUpButtonStyled
+      <LoginButtonStyled
         // onClick={() => {
         //   openModal();
         //   resetFormData();
         // }}
         onClick={openModal}
       >
-        Sign Up
-      </SignUpButtonStyled>
+        Login
+      </LoginButtonStyled>
       <Modal
         isOpen={isModalOpen}
         // onRequestClose={() => {
@@ -98,7 +98,7 @@ const SignUpButton = () => {
         }}
       >
         <ModalContent>
-          <SignMeUp formData={formData} setFormData={setFormData} />
+          <LogMeIn formData={formData} setFormData={setFormData} />
           <button onClick={closeModal}>Close</button>
         </ModalContent>
       </Modal>
@@ -106,4 +106,4 @@ const SignUpButton = () => {
   );
 };
 
-export default SignUpButton;
+export default LoginButton;
