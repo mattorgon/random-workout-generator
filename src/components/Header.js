@@ -8,6 +8,11 @@ import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../context/AuthContext";
 import UserMenuModal from "./UserMenuModal";
+import SlidingPane from "react-sliding-pane";
+
+// import "react-sliding-pane/dist/react-sliding-pane.css";
+import "../styles/parent-slide-pane.css";
+import "../styles/sliding-pane.css";
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -71,7 +76,7 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 50px;
+  width: 90%;
   height: 15px;
   font-size: 5px;
 `;
@@ -100,6 +105,15 @@ const TitleStyle = styled.div`
 const SignedIn = styled.div`
   background-color: red;
 `;
+
+const paneStyle = {
+  width: "20px",
+  // overlay: { width: "20px" },
+  // content: {
+  //   width: "20px",
+  // },
+};
+
 const Header = () => {
   let title = "I Pick, U Lift";
 
@@ -109,12 +123,21 @@ const Header = () => {
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
+  const [isPaneOpen, setIsPaneOpen] = useState(false);
+
   const openUserMenu = () => {
-    setIsUserMenuOpen(true);
+    //setIsUserMenuOpen(true);
+    setIsPaneOpen(true);
   };
 
   const closeUserMenu = () => {
-    setIsUserMenuOpen(false);
+    //setIsUserMenuOpen(false);
+    setIsPaneOpen(false);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    setIsPaneOpen(false); // Close the modal if onClose is a function
   };
 
   useEffect(() => {
@@ -129,16 +152,41 @@ const Header = () => {
         <Underline />
       </TitleWrapper>
 
-      <Button darkMode={darkMode} onClick={toggleDarkMode}>
-        Toggle Dark Mode
-      </Button>
       {isSignedIn ? (
+        // <>
+        //   Welcome,{" "}
+        //   <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
+        //     {username}
+        //   </span>
+        //   <UserMenuModal isOpen={isUserMenuOpen} onClose={closeUserMenu} />
+        // </>
         <>
           Welcome,{" "}
           <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
             {username}
           </span>
-          <UserMenuModal isOpen={isUserMenuOpen} onClose={closeUserMenu} />
+          {/* <div className=".custom-width-panes"> */}
+          <SlidingPane
+            className="my-custom-slide-pane.custom-width-panes.slide-pane_from_right my-custom-slide-pane custom-width-panes"
+            // overlayClassName="some-custom-overlay-class"
+            isOpen={isPaneOpen}
+            // width="40%"
+            title={username}
+            // subtitle="Optional subtitle."
+            onRequestClose={() => {
+              // triggered on "<" on left top click or on outside click
+              setIsPaneOpen(false);
+            }}
+          >
+            <Button darkMode={darkMode} onClick={toggleDarkMode}>
+              Toggle Dark Mode
+            </Button>
+            <Button onClick={handleSignOut}>Sign Out</Button>
+            {/* <button onClick={handleSignOut}>Sign Out</button> */}
+            <div>And I am pane content.</div>
+            <br />
+          </SlidingPane>
+          {/* </div> */}
         </>
       ) : (
         <div>
