@@ -9,6 +9,7 @@ import LoginButton from "./LoginButton";
 import { useAuth } from "../context/AuthContext";
 import UserMenuModal from "./UserMenuModal";
 import SlidingPane from "react-sliding-pane";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 // import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
@@ -40,19 +41,6 @@ const HeaderStyle = styled.div`
   padding-top: 5px;
   // padding: 10px;
 `;
-
-// const Underline = styled.div`
-//   position: absolute;
-//   border-radius: 1.5px;
-//   width: 100%; /* Occupy the full width */
-//   height: 3px;
-//   background-color: #f1ba66;
-//   margin-bottom: 2px;
-//   //z-index: 1;
-//   margin-top: 10px;
-//   //   bottom: 0;
-//   //   left: 0;
-// `;
 
 const Underline = styled.div`
   border-radius: 1.5px;
