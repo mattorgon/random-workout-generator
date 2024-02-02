@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 import UserMenuModal from "./UserMenuModal";
 import SlidingPane from "react-sliding-pane";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 // import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
 import "../styles/sliding-pane.css";
@@ -102,7 +102,7 @@ const paneStyle = {
   // },
 };
 
-const Header = () => {
+const Header = (props) => {
   let title = "I Pick, U Lift";
 
   const { isSignedIn, username, signOut } = useAuth();
@@ -112,6 +112,12 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const [isPaneOpen, setIsPaneOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleNavigateToSavedWorkouts = () => {
+    navigate("/savedWorkouts");
+  };
 
   const openUserMenu = () => {
     //setIsUserMenuOpen(true);
@@ -169,6 +175,7 @@ const Header = () => {
             <Button darkMode={darkMode} onClick={toggleDarkMode}>
               Toggle Dark Mode
             </Button>
+            <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button>
             <Button onClick={handleSignOut}>Sign Out</Button>
             {/* <button onClick={handleSignOut}>Sign Out</button> */}
             <div>And I am pane content.</div>
