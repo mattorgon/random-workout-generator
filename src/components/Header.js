@@ -67,6 +67,7 @@ const Button = styled.button`
   width: 90%;
   height: 15px;
   font-size: 5px;
+  margin-bottom: 1vh;
 `;
 
 const TitleStyle = styled.div`
@@ -94,6 +95,12 @@ const SignedIn = styled.div`
   background-color: red;
 `;
 
+const Welcome = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 4vw;
+`;
+
 const paneStyle = {
   width: "20px",
   // overlay: { width: "20px" },
@@ -104,6 +111,7 @@ const paneStyle = {
 
 const Header = (props) => {
   let title = "I Pick, U Lift";
+  let space = "\u00A0";
 
   const { isSignedIn, username, signOut } = useAuth();
 
@@ -154,8 +162,8 @@ const Header = (props) => {
         //   </span>
         //   <UserMenuModal isOpen={isUserMenuOpen} onClose={closeUserMenu} />
         // </>
-        <>
-          Welcome,{" "}
+        <Welcome>
+          Welcome,{space}
           <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
             {username}
           </span>
@@ -182,7 +190,7 @@ const Header = (props) => {
             <br />
           </SlidingPane>
           {/* </div> */}
-        </>
+        </Welcome>
       ) : (
         <div>
           <LoginButton />
