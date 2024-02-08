@@ -12,6 +12,7 @@ import pushupMan from "../assets/Pushup man no bkgd.gif";
 import { getLockedExercises } from "./SelectedExerciseList";
 import { darkModeStyles, lightModeStyles } from "../styles";
 import { useDarkMode } from "../context/DarkModeProvider";
+import SaveButton from "./SaveButton";
 
 const DisplayLength = styled.div`
   margin-top: 10px;
@@ -48,17 +49,6 @@ const BodySeg = () => {
   };
 
   const handleFormSubmit = () => {
-    // console.log('Button clicked');
-    // //const { selectedExercises: exercises, updatedBodySegments } = getRandomExercises(toggledButtons, 3);
-    // exercises = getRandomExercises(toggledButtons, 3);
-
-    // console.log('Exercises:', exercises);
-    // //console.log('Updated Body Segments:', updatedBodySegments);
-    // setSelectedExercises(exercises);
-    // //setToggledButtons(updatedBodySegments);
-    // setSubmitButtonClicked(true);
-    // // Additional logic if needed
-
     console.log("Button clicked");
     console.log("slider val: ", sliderValue);
     const locked = getLockedExercises();
@@ -221,8 +211,15 @@ const BodySeg = () => {
       <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
 
       {submitButtonClicked && (
-        <SelectedExerciseList selectedExercises={selectedExercises} />
+        <>
+          <SelectedExerciseList selectedExercises={selectedExercises} />
+          <SaveButton
+            buttonText={"Save Workout"}
+            exercises={selectedExercises}
+          />
+        </>
       )}
+
       {/* <YourWorkout selectedExercises={selectedExercises} />}
             <SelectedExerciseList selectedExercises={selectedExercises}/> */}
     </>
