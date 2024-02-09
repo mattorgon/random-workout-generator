@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
 import { useAuth } from "../context/AuthContext";
+//import jwt from "jsonwebtoken";
 
 const Form = styled.form`
   max-width: 400px;
@@ -64,8 +65,9 @@ const LogMeIn = ({ formData, setFormData }) => {
         // Login successful, you can perform additional actions here
         const data = await response.json();
         console.log("Login successful:", data);
+        console.log("ID: ", data.userID);
 
-        signIn(formData.username);
+        signIn(formData.username, data.userID);
       } else {
         // Login failed, update state to show the error message
         console.error("Login failed");

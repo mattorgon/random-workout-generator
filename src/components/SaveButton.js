@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useAuth } from "../context/AuthContext";
 
 const SaveButtonStyle = styled.button`
   background-color: #cc2936;
@@ -17,25 +18,30 @@ const SaveButtonStyle = styled.button`
   }
 `;
 
+// Front-end SaveButton component
 const SaveButton = ({ buttonText, exercises }) => {
+  const { userId } = useAuth();
+
   const handleSave = async () => {
     try {
-      // Make a POST request to your backend endpoint
-      const response = await fetch("http://localhost:3001/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Add any other headers if needed
-        },
-        body: JSON.stringify({ savedExercises: exercises }),
-      });
+      const response = await fetch(
+        "http://localhost:3001/workouts/saveWorkout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId, // Replace with the actual user ID. username for now
+            savedExercises: exercises,
+          }),
+        }
+      );
 
       if (response.ok) {
-        // Workout saved successfully
         console.log("Workout saved successfully!");
-        // You can perform any other actions here after successful save
+        // Perform other actions if needed
       } else {
-        // Handle error if the request was not successful
         console.error("Failed to save workout");
       }
     } catch (error) {

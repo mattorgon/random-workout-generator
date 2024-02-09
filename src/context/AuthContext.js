@@ -1,24 +1,30 @@
 import React, { createContext, useState, useContext } from "react";
+//import jwt from "jsonwebtoken";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
 
-  const signIn = (user) => {
+  const signIn = (user, userID) => {
+    //const decodedToken = jwt.decode(token);
     setIsSignedIn(true);
+    setUserId(userID);
     setUsername(user);
     console.log(user);
   };
 
   const signOut = () => {
     setIsSignedIn(false);
-    setUsername(""); // Reset username when signing out
+    setUsername(null); // Reset username when signing out
   };
 
   return (
-    <AuthContext.Provider value={{ isSignedIn, username, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ isSignedIn, username, userId, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
