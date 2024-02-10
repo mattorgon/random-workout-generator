@@ -66,8 +66,9 @@ const LogMeIn = ({ formData, setFormData }) => {
         const data = await response.json();
         console.log("Login successful:", data);
         console.log("ID: ", data.userID);
+        console.log("token: ", data.token);
 
-        signIn(formData.username, data.userID);
+        signIn(formData.username, data.userID, data.token);
       } else {
         // Login failed, update state to show the error message
         console.error("Login failed");

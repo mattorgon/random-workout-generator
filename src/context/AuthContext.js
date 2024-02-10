@@ -7,11 +7,13 @@ const AuthProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [userToken, setUserToken] = useState("");
 
-  const signIn = (user, userID) => {
+  const signIn = (user, userID, token) => {
     //const decodedToken = jwt.decode(token);
     setIsSignedIn(true);
     setUserId(userID);
+    setUserToken(token);
     setUsername(user);
     console.log(user);
   };
@@ -23,7 +25,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isSignedIn, username, userId, signIn, signOut }}
+      value={{ isSignedIn, username, userId, userToken, signIn, signOut }}
     >
       {children}
     </AuthContext.Provider>
