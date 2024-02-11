@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 import UserMenuModal from "./UserMenuModal";
 import SlidingPane from "react-sliding-pane";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
 import "../styles/sliding-pane.css";
@@ -122,9 +122,17 @@ const Header = (props) => {
   const [isPaneOpen, setIsPaneOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPathname = location.pathname;
 
   const handleNavigateToSavedWorkouts = () => {
     navigate("/savedWorkouts");
+    closeUserMenu();
+  };
+
+  const handleNavigateToMainScreen = () => {
+    navigate("/");
+    closeUserMenu();
   };
 
   const openUserMenu = () => {
@@ -183,7 +191,20 @@ const Header = (props) => {
             <Button darkMode={darkMode} onClick={toggleDarkMode}>
               Toggle Dark Mode
             </Button>
-            <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button>
+            {/* <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button> */}
+            {/* Conditionally render the button based on the current pathname */}
+            {currentPathname === "/" && (
+              <Button onClick={handleNavigateToSavedWorkouts}>
+                My Workouts
+              </Button>
+            )}
+
+            {currentPathname === "/savedWorkouts" && (
+              <Button onClick={handleNavigateToMainScreen}>
+                Generate Workouts
+              </Button>
+            )}
+
             <Button onClick={handleSignOut}>Sign Out</Button>
             {/* <button onClick={handleSignOut}>Sign Out</button> */}
             <div>And I am pane content.</div>

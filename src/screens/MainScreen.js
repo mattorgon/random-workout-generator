@@ -36,7 +36,7 @@ const MainScreen = () => {
   return (
     <>
       <ScreenSyle darkMode={darkMode}>
-        <Header darkMode={darkMode} />
+        {/* <Header darkMode={darkMode} /> */}
         <Intro darkMode={darkMode} />
         <BodySeg darkMode={darkMode} />
         {/* <WorkoutCount/> */}
