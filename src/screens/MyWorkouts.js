@@ -1,22 +1,10 @@
-// // SavedWorkouts.js
-// import React from "react";
-// import styled from "@emotion/styled";
-
-// const MyWorkouts = () => {
-//   return (
-//     <div>
-//       <h2>Your Saved Workouts</h2>
-//       {/* Add your saved workouts content here */}
-//     </div>
-//   );
-// };
-
-// export default MyWorkouts;
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useAuth } from "../context/AuthContext";
-import Calendar from "react-calendar";
-import "../styles/calendar.css";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const CalendarContainer = styled.div`
   display: grid;
@@ -30,6 +18,7 @@ const DayCell = styled.div`
 `;
 
 const WorkoutList = styled.ul`
+  justify-content: center;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -39,18 +28,18 @@ const WorkoutItem = styled.li`
   margin-bottom: 5px;
 `;
 
-const CalendarStyle = styled.div`
-  max-width: 50%;
+const SavedWorkoutScreen = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
 `;
-
-// const calendarStyle = {
-//   backgroundColor: "red",
-// };
 
 const SavedWorkoutsPage = () => {
   const [savedWorkouts, setSavedWorkouts] = useState({});
 
-  const [value, onChange] = useState(new Date());
+  // const [value, onChange] = useState(new Date());
+
+  const [value, setValue] = useState(dayjs());
 
   const { userToken } = useAuth();
 
@@ -81,26 +70,6 @@ const SavedWorkoutsPage = () => {
   }, []);
   // Empty dependency array ensures the effect runs once on component mount
 
-  //   return (
-  //     <div>
-  //       <h1>Your Saved Workouts</h1>
-  //       <CalendarContainer>
-  //         {savedWorkouts.map((workout) => (
-  //           <DayCell key={workout.date}>
-  //             <h2>{new Date(workout.date).toLocaleDateString()}</h2>
-  //             <WorkoutList>
-  //               {workout.exercises.map((exercise, index) => (
-  //                 <WorkoutItem key={index}>{exercise.name}</WorkoutItem>
-  //               ))}
-  //             </WorkoutList>
-  //           </DayCell>
-  //         ))}
-  //       </CalendarContainer>
-  //     </div>
-  //   );
-  // };
-
-  // Assuming savedWorkouts is an array of workout objects with a 'date' property
   const groupedWorkouts = {};
   console.log("swsw: ", savedWorkouts);
   if (Array.isArray(savedWorkouts)) {
@@ -121,13 +90,14 @@ const SavedWorkoutsPage = () => {
   }
 
   const days = Object.keys(groupedWorkouts);
+  console.log("day: ", days);
 
   return (
-    <div>
+    <SavedWorkoutScreen>
       <h1>Your Saved Workouts</h1>
-      <CalendarStyle>
-        <Calendar onChange={onChange} value={value} />
-      </CalendarStyle>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
+      </LocalizationProvider>
       <CalendarContainer>
         {days.map((day) => (
           <DayCell key={day}>
@@ -149,7 +119,7 @@ const SavedWorkoutsPage = () => {
           </DayCell>
         ))}
       </CalendarContainer>
-    </div>
+    </SavedWorkoutScreen>
   );
 };
 
