@@ -6,9 +6,7 @@ import SignMeUp from "./SignMeUp";
 import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../context/AuthContext";
-import UserMenuModal from "./UserMenuModal";
 import SlidingPane from "react-sliding-pane";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 // import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
@@ -100,13 +98,21 @@ const Welcome = styled.div`
   margin-right: 4vw;
 `;
 
-const paneStyle = {
-  width: "20px",
-  // overlay: { width: "20px" },
-  // content: {
-  //   width: "20px",
-  // },
-};
+const LoginButtonComps = styled.div`
+  //background-color: red;
+  display: flex;
+  gap: 5px; /* Add space between the buttons */
+  align-items: stretch;
+  padding-right: 5px;
+
+  & > button {
+    flex: 1;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const Header = (props) => {
   let title = "I Pick, U Lift";
@@ -212,10 +218,10 @@ const Header = (props) => {
           {/* </div> */}
         </Welcome>
       ) : (
-        <div>
+        <LoginButtonComps>
           <LoginButton />
           <SignUpButton />
-        </div>
+        </LoginButtonComps>
       )}
     </HeaderStyle>
   );

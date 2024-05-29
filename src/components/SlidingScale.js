@@ -6,6 +6,7 @@ import { useDarkMode } from "../context/DarkModeProvider";
 const SliderContainer = styled.div`
   flex-wrap: nowrap;
   max-width: 600px;
+  width: 90%;
   margin: 20px auto; /* Center the container horizontally */
   position: relative;
 `;

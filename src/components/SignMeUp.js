@@ -6,24 +6,24 @@ import { useAuth } from "../context/AuthContext";
 const Form = styled.form`
   max-width: 400px;
   margin: auto;
-  background: black;
 `;
 
 const Label = styled.label`
   display: block;
-  background-color: blue;
   font-size: 60%;
 `;
 
 const Input = styled.input`
   width: 100%;
   margin-top: 0px;
-  background-color: red;
 `;
 
 const Button = styled.button`
   background-color: #3498db;
   color: #fff;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
 `;
 
 const UsernameTaken = styled.div`
