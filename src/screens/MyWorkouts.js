@@ -6,6 +6,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
+import { ThemeProvider } from "@mui/material/styles";
+import { useDarkMode } from "../context/DarkModeProvider";
+import getTheme from "../styles/theme"; // Import the theme
 
 const CalendarContainer = styled.div`
   display: grid;
@@ -23,6 +26,9 @@ const DayCell = styled.div`
   font-size: 1vw;
   display: flex;
   flex-direction: column;
+  border-color: ${(props) => (props.darkMode ? "#f1ba66" : "#5b7564")};
+  color: ${(props) => (props.darkMode ? "#F8F0E3" : "#000000")};
+  overflow-wrap: break-word;
 `;
 
 const WorkoutList = styled.ul`
@@ -35,7 +41,6 @@ const WorkoutList = styled.ul`
 
 const WorkoutItem = styled.li`
   margin-bottom: 5px;
-  // justify-content: center;
 `;
 
 const WorkoutItemUL = styled.li`
@@ -47,8 +52,8 @@ const SavedWorkoutScreen = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+
 const DateStyle = styled.div`
-  // font-size: 16px;
   font-size: 1.5vw;
   font-weight: bold;
 `;
@@ -62,31 +67,24 @@ const DatePickerStyle = styled.div`
   width: 50%;
   height: 10%;
   align-self: center;
+  color: ${(props) => (props.darkMode ? "#f1ba66" : "#000000")};
 
   @media (max-width: 768px) {
     width: 50%; // Adjust the width for smaller screens
   }
-
-  // .MuiTextField-root {
-  //   height: 40px; // Adjust the height as needed
-  // }
 `;
 
 const TitleStyle = styled.div`
   font-size: 100%;
   font-weight: bold;
+  color: ${(props) => (props.darkMode ? "#ffffff" : "#32533D")};
 `;
 
 const SavedWorkoutsPage = () => {
   const [savedWorkouts, setSavedWorkouts] = useState({});
-
-  // const [value, onChange] = useState(new Date());
-
   const [value, setValue] = useState(dayjs());
-
   const { userToken } = useAuth();
-
-  console.log("check", userToken);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,18 +109,14 @@ const SavedWorkoutsPage = () => {
         }
 
         setSavedWorkouts(workoutsData);
-        console.log("workoutdata: ", workoutsData);
       } catch (error) {
         console.error("Error fetching saved workouts:", error);
       }
     };
 
     fetchData();
-  }, [value]);
-  // Empty dependency array ensures the effect runs once on component mount
+  }, [value, userToken]);
 
-  // Function to calculate the date range
-  // Function to calculate the date range
   const calculateDateRange = (selectedDate) => {
     const dateRange = [];
     for (let i = -3; i <= 3; i++) {
@@ -133,137 +127,55 @@ const SavedWorkoutsPage = () => {
     return dateRange;
   };
 
-  //const days = generateDaysArray();
-
-  // const groupedWorkouts = {};
-  // console.log("swsw: ", savedWorkouts);
-  // if (Array.isArray(savedWorkouts)) {
-  //   savedWorkouts.forEach((workout) => {
-  //     const dateKey = new Date(workout.date);
-  //     const formattedDate = dateKey.toLocaleDateString();
-  //     const formattedTime = dateKey.toLocaleTimeString();
-
-  //     if (!groupedWorkouts[formattedDate]) {
-  //       groupedWorkouts[formattedDate] = [];
-  //     }
-
-  //     groupedWorkouts[formattedDate].push({
-  //       ...workout,
-  //       formattedTime,
-  //     });
-  //   });
-  // }
-
-  // const days = Object.keys(groupedWorkouts);
-  //console.log("day: ", days);
-
-  //   return (
-  //     <SavedWorkoutScreen>
-  //       <h1>Your Saved Workouts</h1>
-  //       <LocalizationProvider dateAdapter={AdapterDayjs}>
-  //         <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
-  //       </LocalizationProvider>
-  //       {Object.keys(savedWorkouts).some(
-  //         (formattedDate) => savedWorkouts[formattedDate].length > 0
-  //       ) ? (
-  //         <CalendarContainer>
-  //           {Object.keys(savedWorkouts).map((formattedDate) => (
-  //             <DayCell key={formattedDate}>
-  //               <h2>{formattedDate}</h2>
-  //               <WorkoutList>
-  //                 {savedWorkouts[formattedDate].map((workout, index) => (
-  //                   <WorkoutItem key={index}>
-  //                     <p>{workout.formattedTime}</p>
-  //                     {/* <p>{workout.name}</p> */}
-
-  //                     {/* <ul>
-  //                       {workout.exercises.map((exercise, index) => (
-  //                         <li key={index}>{exercise.name}</li>
-  //                       ))}
-  //                     </ul> */}
-
-  //                     {workout.exercises && workout.exercises.length > 0 ? (
-  //                       <ul>
-  //                         {workout.exercises.map((exercise, index) => (
-  //                           <li key={index}>{exercise.name}</li>
-  //                         ))}
-  //                       </ul>
-  //                     ) : (
-  //                       <p>No saved exercises</p>
-  //                     )}
-  //                   </WorkoutItem>
-  //                 ))}
-  //               </WorkoutList>
-  //             </DayCell>
-  //           ))}
-  //         </CalendarContainer>
-  //       ) : (
-  //         <p>No saved workouts</p>
-  //       )}
-  //     </SavedWorkoutScreen>
-  //   );
-  // };
   return (
-    <SavedWorkoutScreen>
-      <TitleStyle>Your Saved Workouts</TitleStyle>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePickerStyle>
-          <DatePicker
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-            renderInput={(startProps, endProps) => (
-              <>
-                <TextField {...startProps} variant="standard" fullWidth />
-                {/* Uncomment the following line if you are using a range selection */}
-                {/* <TextField {...endProps} variant="standard" fullWidth /> */}
-              </>
-            )}
-          />
-        </DatePickerStyle>
-      </LocalizationProvider>
-
-      <CalendarContainer>
-        {Object.keys(savedWorkouts).map((formattedDate) => {
-          const workoutsForDay = savedWorkouts[formattedDate];
-
-          return (
-            <DayCell key={formattedDate}>
-              <DateStyle>{formattedDate}</DateStyle>
-              {/* <h2>{formattedDate}</h2> */}
-              {workoutsForDay.length > 0 ? (
-                <WorkoutList>
-                  {workoutsForDay.map((workout, index) => (
-                    <WorkoutItem key={index}>
-                      {/* <p>{workout.formattedTime}</p> */}
-                      <p>{new Date(workout.date).toLocaleTimeString()}</p>
-                      <p>{workout.name}</p>
-                      {/* {workout.name ? (
-                        <p>{workout.name}</p>
-                      ) : (
-                        <p>No saved workout</p>
-                      )} */}
-                      {workout.exercises && workout.exercises.length > 0 ? (
-                        <WorkoutItemUL>
-                          {workout.exercises.map((exercise, index) => (
-                            <li key={index}>{exercise.name}</li>
-                          ))}
-                        </WorkoutItemUL>
-                      ) : (
-                        <p>No saved exercises</p>
-                        //<EmptyCell>No saved exercises</EmptyCell>
-                      )}
-                    </WorkoutItem>
-                  ))}
-                </WorkoutList>
-              ) : (
-                // <p>No saved workout</p>
-                <EmptyCell>No saved exercises</EmptyCell>
+    <ThemeProvider theme={getTheme(darkMode)}>
+      <SavedWorkoutScreen>
+        <TitleStyle darkMode={darkMode}>Your Saved Workouts</TitleStyle>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePickerStyle darkMode={darkMode}>
+            <DatePicker
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+              renderInput={(params) => (
+                <TextField {...params} variant="standard" fullWidth />
               )}
-            </DayCell>
-          );
-        })}
-      </CalendarContainer>
-    </SavedWorkoutScreen>
+            />
+          </DatePickerStyle>
+        </LocalizationProvider>
+        <CalendarContainer>
+          {Object.keys(savedWorkouts).map((formattedDate) => {
+            const workoutsForDay = savedWorkouts[formattedDate];
+
+            return (
+              <DayCell key={formattedDate} darkMode={darkMode}>
+                <DateStyle>{formattedDate}</DateStyle>
+                {workoutsForDay.length > 0 ? (
+                  <WorkoutList>
+                    {workoutsForDay.map((workout, index) => (
+                      <WorkoutItem key={index}>
+                        <p>{new Date(workout.date).toLocaleTimeString()}</p>
+                        <p>{workout.name}</p>
+                        {workout.exercises && workout.exercises.length > 0 ? (
+                          <WorkoutItemUL>
+                            {workout.exercises.map((exercise, index) => (
+                              <li key={index}>{exercise.name}</li>
+                            ))}
+                          </WorkoutItemUL>
+                        ) : (
+                          <p>No saved exercises</p>
+                        )}
+                      </WorkoutItem>
+                    ))}
+                  </WorkoutList>
+                ) : (
+                  <EmptyCell>No saved exercises</EmptyCell>
+                )}
+              </DayCell>
+            );
+          })}
+        </CalendarContainer>
+      </SavedWorkoutScreen>
+    </ThemeProvider>
   );
 };
 

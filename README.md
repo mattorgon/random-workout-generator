@@ -2,7 +2,7 @@
 Add loading image
 Dark mode to all components
 xxxx----Edit login buttons----xxxx
-Edit sliding pane style
+xxxx----Edit sliding pane style----xxxx
 change workout card images
 Smooth text render
 Connect push/pull
