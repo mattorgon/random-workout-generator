@@ -210,7 +210,7 @@ const BodySeg = () => {
         maxSliderValue={initialSliderValue * 2}
       />
 
-      <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
+      <SubmitButton buttonText="Generate" onButtonClick={handleFormSubmit} />
 
       {submitButtonClicked && (
         <>

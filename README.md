@@ -7,6 +7,7 @@ change workout card images
 Smooth text render
 Connect push/pull
 Increase exercise list (maybe restructure?)
+Auto-scroll on generated workout
 Deploy to live url
 
 
