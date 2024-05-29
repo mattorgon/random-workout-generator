@@ -1,17 +1,19 @@
 .my-custom-slide-pane {
-    background-color: lightblue;
-    border: 2px solid navy;
+    background-color: rgb(119, 119, 113);
+    border: 1px solid rgb(38, 38, 46);
+    
     /* Add any additional custom styles here */
   }
   
   .my-custom-slide-pane__title {
     color: #ff5733;
+    
     /* Add custom title styles here */
   }
 
   .my-custom-slide-pane.custom-width-panes.slide-pane_from_right .slide-pane__header {
     /* Your custom styles for .slide-pane__header */
-    background-color: red;
+    /* background-color: red; */
     /* Add other styles as needed */
   }
 

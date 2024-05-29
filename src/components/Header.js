@@ -61,10 +61,11 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 90%;
+  width: 80%;
   height: 15px;
   font-size: 5px;
   margin-bottom: 1vh;
+  margin-top: 1vh;
 `;
 
 const TitleStyle = styled.div`
@@ -177,7 +178,10 @@ const Header = (props) => {
         // </>
         <Welcome>
           Welcome,{space}
-          <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
+          <span
+            onClick={openUserMenu}
+            style={{ cursor: "pointer", textDecorationLine: "underline" }}
+          >
             {username}
           </span>
           {/* <div className=".custom-width-panes"> */}
@@ -211,8 +215,6 @@ const Header = (props) => {
             )}
 
             <Button onClick={handleSignOut}>Sign Out</Button>
-            {/* <button onClick={handleSignOut}>Sign Out</button> */}
-            <div>And I am pane content.</div>
             <br />
           </SlidingPane>
           {/* </div> */}
