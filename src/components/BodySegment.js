@@ -6,7 +6,6 @@ import ToggleableButtonComponent from "./ToggleButton";
 import SubmitButton from "./SubmitButton";
 import SelectedExerciseList from "./SelectedExerciseList";
 import { getRandomExercises } from "./SelectedExercises";
-import YourWorkout from "./GenerateWorkout";
 import WorkoutCount from "./WorkoutCount";
 import pushupMan from "../assets/Pushup man no bkgd.gif";
 import { getLockedExercises } from "./SelectedExerciseList";
@@ -226,9 +225,6 @@ const BodySeg = () => {
           )}
         </>
       )}
-
-      {/* <YourWorkout selectedExercises={selectedExercises} />}
-            <SelectedExerciseList selectedExercises={selectedExercises}/> */}
     </>
   );
 };

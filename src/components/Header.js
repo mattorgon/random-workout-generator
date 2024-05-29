@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
 import { darkModeStyles, lightModeStyles } from "../styles";
-import DarkToggleSwitch from "./DarkToggleSwitch";
 import SignMeUp from "./SignMeUp";
 import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";

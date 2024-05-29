@@ -6,13 +6,6 @@ import { useDarkMode } from "../context/DarkModeProvider";
 const ToggleableButton = styled.button`
   // background-color: ${(props) =>
     props.checked ? "DarkSlateGray" : "white"};
-  // color: ${(props) => (props.checked ? "white" : "DarkSlateGray")};
-  // border: 2px solid DarkSlateGray;
-  // border-radius: 6px;
-  // padding: 8px;
-  // margin: 4px;
-  // cursor: pointer;
-  //background-color: ${(props) => (props.checked ? "#5B7564" : "white")};
 
   background-color: ${
     (props) =>
@@ -45,10 +38,7 @@ const ToggleableButton = styled.button`
   height: 30px;
   width: 100px;
   cursor: pointer;
-  // &:hover {
 
-  //   background-color: #1c1c1c; //#f1ba66;
-  // }
   &:hover {
     background-color: ${(props) =>
       props.darkMode
@@ -77,13 +67,3 @@ const ToggleableButtonComponent = ({ buttonText, onButtonClick, checked }) => {
 };
 
 export default ToggleableButtonComponent;
-
-// background-color: ${(props) =>
-//   props.darkMode
-//     ? darkModeStyles.toggleButton.backgroundColor
-//     : lightModeStyles.toggleButton.backgroundColor};
-// color: ${(props) =>
-//   props.darkMode
-//     ? darkModeStyles.toggleButton.color
-//     : lightModeStyles.toggleButton.color};
-// //${(props) => (props.checked ? "white" : "#5B7564")};

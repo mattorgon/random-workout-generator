@@ -68,8 +68,6 @@ const WorkoutCount = ({ onSliderChange, maxSliderValue }) => {
         <Underline />
       </TitleWrapper>
       <SubtitleStyle darkMode={darkMode}>{subtitleText}</SubtitleStyle>
-      {/* <SlidingScale onChange={onSliderChange} /> */}
-      {/* <SlidingScale value={initialSliderValue} onChange={handleSliderChange} /> */}
       <SlidingScale
         onChange={onSliderChange}
         value={Math.floor(maxSliderValue / 2)}

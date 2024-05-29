@@ -27,22 +27,11 @@ const LoginButton = () => {
   });
 
   const openModal = () => {
-    // setFormData({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    // });
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    // Reset form data when modal is closed
-    // setFormData({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    // });
   };
 
   const resetFormData = () => {
@@ -55,21 +44,9 @@ const LoginButton = () => {
 
   return (
     <>
-      <LoginButtonStyled
-        // onClick={() => {
-        //   openModal();
-        //   resetFormData();
-        // }}
-        onClick={openModal}
-      >
-        Login
-      </LoginButtonStyled>
+      <LoginButtonStyled onClick={openModal}>Login</LoginButtonStyled>
       <Modal
         isOpen={isModalOpen}
-        // onRequestClose={() => {
-        //   closeModal();
-        //   resetFormData();
-        // }}
         onRequestClose={closeModal}
         contentLabel="Sign Up Modal"
         style={{
