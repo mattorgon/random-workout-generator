@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
+import { useAuth } from "../context/AuthContext";
 
 const Form = styled.form`
   max-width: 400px;
@@ -34,6 +35,8 @@ const UsernameTaken = styled.div`
 
 const SignMeUp = ({ formData, setFormData }) => {
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
+
+  const { signIn } = useAuth();
 
   const handleChange = async (e) => {
     console.log("Event:", e);
@@ -86,12 +89,23 @@ const SignMeUp = ({ formData, setFormData }) => {
         const data = await response.json();
         console.log("User registered:", data);
         // Optionally, you can perform additional actions like redirecting the user
+        autoLogin(formData.username, data.userID, data.token);
       } else {
         // Registration failed
         console.error("Registration failed");
       }
     } catch (error) {
       console.error("Error during registration:", error);
+    }
+  };
+  const autoLogin = async (username, userID, token) => {
+    try {
+      //same authentication logic as in login function
+      signIn(username, userID, token);
+
+      console.log("Auto-login successful");
+    } catch (error) {
+      console.error("Error during auto-login:", error);
     }
   };
 
@@ -114,7 +128,7 @@ const SignMeUp = ({ formData, setFormData }) => {
         />
         <UsernameTaken>{isUsernameTaken}</UsernameTaken>
       </Label>
-      <Label>
+      {/* <Label>
         Email:
         <Input
           type="email"
@@ -122,7 +136,7 @@ const SignMeUp = ({ formData, setFormData }) => {
           value={formData.email}
           onChange={handleChange}
         />
-      </Label>
+      </Label> */}
       <Label>
         Password:
         <Input

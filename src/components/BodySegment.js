@@ -13,6 +13,7 @@ import { getLockedExercises } from "./SelectedExerciseList";
 import { darkModeStyles, lightModeStyles } from "../styles";
 import { useDarkMode } from "../context/DarkModeProvider";
 import SaveButton from "./SaveButton";
+import { useAuth } from "../context/AuthContext";
 
 const DisplayLength = styled.div`
   margin-top: 10px;
@@ -24,6 +25,8 @@ const BodySeg = () => {
   let subtitleText = "What are we hitting today?";
   let exercises = [];
   let initialSliderValue = 5;
+
+  const { isSignedIn } = useAuth();
 
   const [sliderValue, setSliderValue] = useState(initialSliderValue);
 
@@ -213,10 +216,14 @@ const BodySeg = () => {
       {submitButtonClicked && (
         <>
           <SelectedExerciseList selectedExercises={selectedExercises} />
-          <SaveButton
-            buttonText={"Save Workout"}
-            exercises={selectedExercises}
-          />
+          {isSignedIn ? (
+            <SaveButton
+              buttonText={"Save Workout"}
+              exercises={selectedExercises}
+            />
+          ) : (
+            <p>Sign in to save workout!</p>
+          )}
         </>
       )}
 
