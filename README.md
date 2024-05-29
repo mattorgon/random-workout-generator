@@ -1,6 +1,6 @@
 #TODO
 Add loading image
-Dark mode to all components
+xxxx----Dark mode to all components----xxxx
 xxxx----Edit login buttons----xxxx
 xxxx----Edit sliding pane style----xxxx
 change workout card images
