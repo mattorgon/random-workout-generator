@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import ToggleableButton from "./ToggleButton";
@@ -37,6 +37,8 @@ const BodySeg = () => {
 
   //submit button
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+
+  const bottomRef = useRef(null);
 
   const { darkMode } = useDarkMode();
 
@@ -140,7 +142,11 @@ const BodySeg = () => {
     margin-bottom: 2px; /* Reset margin-bottom */
     line-height: 0;
   `;
-
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [submitButtonClicked]);
   return (
     <>
       <TitleWrapper>
@@ -215,6 +221,7 @@ const BodySeg = () => {
       {submitButtonClicked && (
         <>
           <SelectedExerciseList selectedExercises={selectedExercises} />
+          <div ref={bottomRef}></div>
           {isSignedIn ? (
             <SaveButton
               buttonText={"Save Workout"}
