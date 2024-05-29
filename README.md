@@ -1,3 +1,15 @@
+#TODO
+Add loading image
+Dark mode to all components
+Edit login buttons
+change workout card images
+Smooth text render
+Connect push/pull
+Increase exercise list (maybe restructure?)
+Deploy to live url
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
