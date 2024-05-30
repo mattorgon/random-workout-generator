@@ -5,7 +5,7 @@ xxxx----Edit login buttons----xxxx
 xxxx----Edit sliding pane style----xxxx
 change workout card images
 xxxx----Smooth text render----xxxx
-Connect push/pull
+xxxx----Connect push/pull----xxxx
 Increase exercise list (maybe restructure?)
 xxxx----Auto-scroll on generated workout----xxxx
 Deploy to live url
