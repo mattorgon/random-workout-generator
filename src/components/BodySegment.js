@@ -28,15 +28,13 @@ const BodySeg = () => {
   const { isSignedIn } = useAuth();
 
   const [sliderValue, setSliderValue] = useState(initialSliderValue);
-
   //body segment toggle buttons
   const [toggledButtons, setToggledButtons] = useState([]);
-
   //exercises
   const [selectedExercises, setSelectedExercises] = useState([]);
-
   //submit button
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const bottomRef = useRef(null);
 
@@ -51,22 +49,25 @@ const BodySeg = () => {
       }
     });
   };
-
+  let lockedProp;
   const handleFormSubmit = () => {
     console.log("Button clicked");
     console.log("slider val: ", sliderValue);
     const locked = getLockedExercises();
     console.log("these are locked", locked);
-    const { selectedExercises: exercises } = getRandomExercises(
-      toggledButtons,
-      sliderValue,
-      locked
-    );
+    const { selectedExercises: exercises, lockedList: pleaseLock } =
+      getRandomExercises(toggledButtons, sliderValue, locked);
+    lockedProp = pleaseLock;
+    console.log("pleeeeeeeeeeeeeeeeeeeeaaaaaaaaaaase3: ", pleaseLock);
     console.log("Exercises:", exercises);
+    setIsLoading(true);
     setSelectedExercises(exercises);
     setSubmitButtonClicked(true);
     scrollToBottom();
-    console.log("dark mode:", darkMode);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   };
 
   const SubtitleStyle = styled.div`
@@ -151,8 +152,10 @@ const BodySeg = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [submitButtonClicked]);
+    if (submitButtonClicked) {
+      scrollToBottom();
+    }
+  }, [submitButtonClicked, isLoading, selectedExercises]);
   return (
     <>
       <TitleWrapper>
@@ -225,18 +228,37 @@ const BodySeg = () => {
       <SubmitButton buttonText="Generate" onButtonClick={handleFormSubmit} />
 
       {submitButtonClicked && (
-        <>
-          <SelectedExerciseList selectedExercises={selectedExercises} />
-          <div ref={bottomRef}></div>
-          {isSignedIn ? (
-            <SaveButton
-              buttonText={"Save Workout"}
-              exercises={selectedExercises}
-            />
+        <div>
+          {isLoading ? (
+            <>
+              <p>Working...</p>
+              <img
+                src={pushupMan}
+                alt="Loading..."
+                style={{ width: 300, height: 300 }}
+                ref={bottomRef}
+              />
+            </>
           ) : (
-            <p>Sign in to save workout!</p>
+            <>
+              <SelectedExerciseList
+                selectedExercises={selectedExercises}
+                lockedList={lockedProp}
+                // onRendered={scrollToBottom}
+              />
+              {/* <div ref={bottomRef}></div> */}
+              {isSignedIn ? (
+                <SaveButton
+                  buttonText={"Save Workout"}
+                  exercises={selectedExercises}
+                  // ref={bottomRef}
+                />
+              ) : (
+                <p>Sign in to save workout!</p>
+              )}
+            </>
           )}
-        </>
+        </div>
       )}
     </>
   );

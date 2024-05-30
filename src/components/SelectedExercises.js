@@ -50,5 +50,5 @@ export const getRandomExercises = (bodySegments, count, lockedList) => {
     }
   }
 
-  return { selectedExercises }; //, updatedBodySegments: bodySegments };
+  return { selectedExercises, lockedList }; //, updatedBodySegments: bodySegments };
 };
