@@ -1,5 +1,10 @@
 import workoutData from "../data/workoutData.json";
 
+const compoundSegments = {
+  Push: ["Chest", "Triceps", "Shoulders"],
+  Pull: ["Back", "Biceps"],
+};
+
 const getRandomExercise = (bodySegments) => {
   const exercises = bodySegments
     .flatMap((segment) => workoutData.exercises?.[segment] || [])
@@ -22,13 +27,18 @@ const getRandomExercise = (bodySegments) => {
 };
 
 export const getRandomExercises = (bodySegments, count, lockedList) => {
+  // Expand compound segments
+  const expandedSegments = bodySegments.flatMap((segment) => {
+    return compoundSegments[segment] || segment;
+  });
+
   const selectedExercises = [];
 
   for (let i = 0; i < count; i++) {
     let e = lockedList.find((lock) => lock.index === i);
 
     if (e === undefined) {
-      const selectedExercise = getRandomExercise(bodySegments);
+      const selectedExercise = getRandomExercise(expandedSegments);
       const isExerciseInLockedList = lockedList.some(
         (lock) => lock.exercise === selectedExercise
       );
