@@ -65,6 +65,7 @@ const BodySeg = () => {
     console.log("Exercises:", exercises);
     setSelectedExercises(exercises);
     setSubmitButtonClicked(true);
+    scrollToBottom();
     console.log("dark mode:", darkMode);
   };
 
@@ -142,10 +143,15 @@ const BodySeg = () => {
     margin-bottom: 2px; /* Reset margin-bottom */
     line-height: 0;
   `;
-  useEffect(() => {
+
+  const scrollToBottom = () => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
   }, [submitButtonClicked]);
   return (
     <>
