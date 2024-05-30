@@ -1,10 +1,10 @@
 #TODO
-Add loading image
+xxxx----Add loading image----xxxx
 xxxx----Dark mode to all components----xxxx
 xxxx----Edit login buttons----xxxx
 xxxx----Edit sliding pane style----xxxx
 change workout card images
-Smooth text render
+xxxx----Smooth text render----xxxx
 Connect push/pull
 Increase exercise list (maybe restructure?)
 xxxx----Auto-scroll on generated workout----xxxx
