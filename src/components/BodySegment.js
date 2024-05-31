@@ -13,6 +13,7 @@ import { darkModeStyles, lightModeStyles } from "../styles";
 import { useDarkMode } from "../context/DarkModeProvider";
 import SaveButton from "./SaveButton";
 import { useAuth } from "../context/AuthContext";
+import { keyframes } from "@emotion/react";
 
 const DisplayLength = styled.div`
   margin-top: 10px;
@@ -69,6 +70,12 @@ const BodySeg = () => {
       setIsLoading(false);
     }, 2000);
   };
+  const dotAnimation = keyframes`
+  0% { content: "Working"; }
+  33% { content: "Working."; }
+  66% { content: "Working.."; }
+  100% { content: "Working..."; }
+`;
 
   const SubtitleStyle = styled.div`
     display: flex;
@@ -143,6 +150,25 @@ const BodySeg = () => {
     padding: 0; /* Reset padding */
     margin-bottom: 2px; /* Reset margin-bottom */
     line-height: 0;
+  `;
+
+  const Container = styled.div`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  `;
+
+  const TextOverlay = styled.div`
+    position: absolute;
+    top: 60%;
+    font-size: 24px;
+    margin-top: 10px; /* Adjust the margin as needed */
+    &::after {
+      content: "Working";
+      animation: ${dotAnimation} 1s steps(3, end) infinite;
+    }
   `;
 
   const scrollToBottom = () => {
@@ -231,8 +257,10 @@ const BodySeg = () => {
         <div>
           {isLoading ? (
             <>
-              <p>Working...</p>
-              <Pushup src={pushupMan} alt="Loading..." ref={bottomRef} />
+              <Container>
+                <TextOverlay />
+                <Pushup src={pushupMan} alt="Loading..." ref={bottomRef} />
+              </Container>
             </>
           ) : (
             <>
