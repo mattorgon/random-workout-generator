@@ -98,8 +98,8 @@ const BodySeg = () => {
   `;
 
   const Pushup = styled.img`
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     margin-bottom: 5px;
     border: none;
     border-radius: 10px;
@@ -232,12 +232,7 @@ const BodySeg = () => {
           {isLoading ? (
             <>
               <p>Working...</p>
-              <img
-                src={pushupMan}
-                alt="Loading..."
-                style={{ width: 300, height: 300 }}
-                ref={bottomRef}
-              />
+              <Pushup src={pushupMan} alt="Loading..." ref={bottomRef} />
             </>
           ) : (
             <>
