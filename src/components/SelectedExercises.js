@@ -6,8 +6,17 @@ const compoundSegments = {
 };
 
 const getRandomExercise = (bodySegments) => {
+  // const exercises = bodySegments
+  //   .flatMap((segment) => workoutData.exercises?.[segment] || [])
+  //   .filter((exercise) => exercise);
   const exercises = bodySegments
-    .flatMap((segment) => workoutData.exercises?.[segment] || [])
+    .flatMap((segment) =>
+      workoutData.exercises[segment].exercises.map((exercise) => ({
+        name: exercise,
+        segment: segment,
+        image: workoutData.exercises[segment].image,
+      }))
+    )
     .filter((exercise) => exercise);
 
   console.log("exercises:", exercises);
@@ -40,15 +49,22 @@ export const getRandomExercises = (bodySegments, count, lockedList) => {
     if (e === undefined) {
       const selectedExercise = getRandomExercise(expandedSegments);
       const isExerciseInLockedList = lockedList.some(
-        (lock) => lock.exercise === selectedExercise
+        (lock) => lock.exercise.name === selectedExercise.name
       );
       if (
-        selectedExercises.includes(selectedExercise) ||
+        selectedExercises.some((ex) => ex.name === selectedExercise.name) ||
         isExerciseInLockedList
       ) {
         i--;
         continue;
       }
+      // if (
+      //   selectedExercises.includes(selectedExercise) ||
+      //   isExerciseInLockedList
+      // ) {
+      //   i--;
+      //   continue;
+      // }
       if (selectedExercise !== null) {
         selectedExercises.push(selectedExercise);
       } else {

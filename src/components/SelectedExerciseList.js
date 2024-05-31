@@ -136,7 +136,8 @@ const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
         {displayedExercises.map((exercise, index) => (
           <ExerciseCardWrapper key={index} delay={index * 0.25}>
             <ExerciseCard
-              exerciseName={exercise}
+              exerciseName={exercise.name}
+              exerciseImage={exercise.image}
               onButtonLock={handleButtonLock}
               checked={toggledLock.some((lock) => lock.exercise === exercise)}
             />

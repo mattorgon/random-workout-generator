@@ -74,9 +74,9 @@ export const getLockedExercises = (lockExercises) => {
 
 const ExerciseCard = ({
   exerciseName,
+  exerciseImage,
   onButtonLock,
   checked,
-  onToggleLock,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -118,7 +118,7 @@ const ExerciseCard = ({
 
   return (
     <CardContainer>
-      <ExerciseGif src={exerciseGif} alt="bicep curls" darkMode={darkMode} />
+      <ExerciseGif src={exerciseImage} alt={exerciseName} darkMode={darkMode} />
       <LockButton
         onClick={handleLockButtonClick}
         checked={checked}

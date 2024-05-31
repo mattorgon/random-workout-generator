@@ -10,7 +10,13 @@ Increase exercise list (maybe restructure?)
 xxxx----Auto-scroll on generated workout----xxxx
 Deploy to live url
 
-
+  <!-- "Biceps": ["Bicep Curls", "Hammer Curls", "Concentration Curls", "EZ Bar Curls", "Preacher Curls", "Reverse Curls", "Zottman Curls", "21s", "Spider Curls", "Dumbbell Hammer Curls"],
+      "Chest": ["Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Flyes", "Push-ups", "Chest Dips", "Chest Press Machine", "Cable Crossover", "Pec Deck Machine", "Incline Dumbbell Press"],
+      "Triceps": ["Tricep Dips", "Skull Crushers", "Tricep Kickbacks", "Close-Grip Bench Press", "Overhead Tricep Extension", "Cable Tricep Pushdowns", "Diamond Push-ups", "Tricep Rope Pushdowns", "Tricep Bench Dips", "Reverse Grip Tricep Pushdowns"],
+      "Legs": ["Squats", "Deadlifts", "Leg Press", "Lunges", "Leg Curls", "Leg Extensions", "Calf Raises", "Romanian Deadlifts", "Hack Squats", "Step-ups"],
+      "Shoulders": ["Overhead Press", "Front Raises", "Lateral Raises", "Reverse Flyes", "Face Pulls", "Shrugs", "Upright Rows", "Arnold Press", "Lateral Raises Machine", "Dumbbell Shoulder Press"],
+      "Core": ["xxxmmmmeeeeddiiuumm","looooooooooooooooooooooooooooooooooong","Planks", "Russian Twists", "Leg Raises", "Bicycle Crunches", "Hanging Leg Raises", "Ab Rollouts", "Mountain Climbers", "Side Planks", "Woodchoppers", "Hollow Body Hold"],
+      "Cardio": ["Running", "Cycling", "Jump Rope", "Swimming", "Rowing", "Elliptical Training", "High-Intensity Interval Training (HIIT)", "Stair Climbing", "Boxing", "Dancing"] -->
 
 # Getting Started with Create React App
 
