@@ -1,66 +1,160 @@
-import React, {useState, useEffect} from 'react';
-import ExerciseCard from './Exercise';
-import styled from '@emotion/styled';
+import React, { useState, useEffect } from "react";
+import ExerciseCard from "./Exercise";
+import styled from "@emotion/styled";
 
 let lockedExercises = [];
 
 export const getLockedExercises = () => {
   return lockedExercises;
-}
+};
 
 const setLockedExercises = (locked) => {
-  lockedExercises = [];
   lockedExercises = locked;
-}
+};
 
-const SelectedExerciseList = ({ selectedExercises }) => {
+const fadeIn = `
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
 
+const ExerciseListStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+const ExerciseCardWrapper = styled.div`
+  opacity: 0;
+  animation: fadeIn 2s forwards; // Apply the fade-in animation
+  ${({ delay }) =>
+    `animation-delay: ${delay}s;`}// Set the animation delay dynamically
+`;
+
+const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
   //exercise toggle lock buttons
-  const [toggledLock, setToggledLock] = useState([]);
+  const [toggledLock, setToggledLock] = useState(lockedList);
+  const [displayedExercises, setDisplayedExercises] = useState([]);
 
-  const ExerciseListStyle = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
-    flex-wrap: wrap;
-`
+  // const ExerciseListStyle = styled.div`
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: center;
+  //   margin-top: 20px;
+  //   gap: 10px;
+  //   flex-wrap: wrap;
+  // `;
 
+  // const handleButtonLock = (buttonText) => {
+  //   setToggledLock((prevLock) => {
+  //     if (prevLock.some((lock) => lock.exercise === buttonText)) {
+  //       return prevLock.filter((lock) => lock.exercise !== buttonText);
+  //     } else {
+  //       const index = selectedExercises.indexOf(buttonText);
+  //       return [...prevLock, { exercise: buttonText, index }];
+  //     }
+  //   });
+  // };
   const handleButtonLock = (buttonText) => {
-   // console.log('Before setIsPressed:', isPressed);
     setToggledLock((prevLock) => {
-        if (prevLock.some(lock => lock.exercise === buttonText)){//(prevLock.includes(buttonText)) {
-            return prevLock.filter((lock) => lock.exercise !== buttonText);
-        } else {
-            const index = selectedExercises.indexOf(buttonText);
-            return [...prevLock, { exercise: buttonText, index }];
-        }
-        });
-  // setLockedExercise(exerciseName, isPressed);
-   // console.log('After setIsPressed:', isPressed);
+      let newLock;
+      if (prevLock.some((lock) => lock.exercise === buttonText)) {
+        newLock = prevLock.filter((lock) => lock.exercise !== buttonText);
+      } else {
+        const index = selectedExercises.indexOf(buttonText);
+        newLock = [...prevLock, { exercise: buttonText, index }];
+      }
+      setLockedExercises(newLock);
+      return newLock;
+    });
   };
 
   useEffect(() => {
-   // console.log('After setIsPressed:', isPressed);
-    console.log('Locked Exercises:', toggledLock);
-    setLockedExercises(toggledLock);
-}, [toggledLock]); // Log values when isPressed or toggledLock change
+    setToggledLock(getLockedExercises());
+  }, []);
 
+  // useEffect(() => {
+  //   console.log("Locked Exercises???????:", toggledLock);
+  //   setLockedExercises(toggledLock);
+  // }, [toggledLock]); // Log values when isPressed or toggledLock change
 
+  useEffect(() => {
+    setDisplayedExercises([]);
+    if (selectedExercises.length > 0) {
+      let delay = 0;
+      selectedExercises.forEach((exercise, index) => {
+        setTimeout(() => {
+          setDisplayedExercises((prevExercises) => {
+            if (!prevExercises.includes(exercise)) {
+              return [...prevExercises, exercise];
+            }
+            return prevExercises;
+          });
+        }, delay);
+        delay += 250; // Delay each exercise render by 500ms
+      });
+    }
+  }, [selectedExercises]);
+
+  // useEffect(() => {
+  //   setDisplayedExercises([]);
+  //   if (selectedExercises.length > 0) {
+  //     let delay = 0;
+  //     selectedExercises.forEach((exercise, index) => {
+  //       setTimeout(() => {
+  //         setDisplayedExercises((prevExercises) => {
+  //           const updatedExercises = [...prevExercises, exercise];
+  //           if (updatedExercises.length === selectedExercises.length) {
+  //             onRendered(); // Call onRendered when all exercises are displayed
+  //           }
+  //           return updatedExercises;
+  //         });
+  //       }, delay);
+  //       delay += 500; // Delay each exercise render by 500ms
+  //     });
+  //   }
+  // }, [selectedExercises, onRendered]);
 
   // Check if selectedExercises is an array
   if (!Array.isArray(selectedExercises)) {
-    console.error('Selected exercises is not an array:', selectedExercises);
-    return null; // or you can return a message, an empty array, or handle it in some other way
+    console.error("Selected exercises is not an array:", selectedExercises);
+    return null; // or return message
   }
 
   return (
-    <ExerciseListStyle>
-      {selectedExercises.map((exercise, index) => (
-        <ExerciseCard key={index} exerciseName={exercise} onButtonLock={handleButtonLock} checked={toggledLock.some(lock => lock.exercise === exercise)} />
-      ))}
-    </ExerciseListStyle>
+    <>
+      <style>{fadeIn}</style> {/* Include the keyframes animation */}
+      <ExerciseListStyle>
+        {displayedExercises.map((exercise, index) => (
+          <ExerciseCardWrapper key={index} delay={index * 0.25}>
+            <ExerciseCard
+              exerciseName={exercise.name}
+              exerciseImage={exercise.image}
+              onButtonLock={handleButtonLock}
+              checked={toggledLock.some((lock) => lock.exercise === exercise)}
+            />
+          </ExerciseCardWrapper>
+        ))}
+      </ExerciseListStyle>
+    </>
+    // <ExerciseListStyle>
+    //   {selectedExercises.map((exercise, index) => (
+    //     <ExerciseCard
+    //       key={index}
+    //       exerciseName={exercise}
+    //       onButtonLock={handleButtonLock}
+    //       checked={toggledLock.some((lock) => lock.exercise === exercise)}
+    //     />
+    //   ))}
+    // </ExerciseListStyle>
   );
 };
 

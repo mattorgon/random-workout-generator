@@ -1,20 +1,14 @@
-// // SavedWorkouts.js
-// import React from "react";
-// import styled from "@emotion/styled";
-
-// const MyWorkouts = () => {
-//   return (
-//     <div>
-//       <h2>Your Saved Workouts</h2>
-//       {/* Add your saved workouts content here */}
-//     </div>
-//   );
-// };
-
-// export default MyWorkouts;
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useAuth } from "../context/AuthContext";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import TextField from "@mui/material/TextField";
+import { ThemeProvider } from "@mui/material/styles";
+import { useDarkMode } from "../context/DarkModeProvider";
+import getTheme from "../styles/theme"; // Import the theme
 
 const CalendarContainer = styled.div`
   display: grid;
@@ -24,115 +18,164 @@ const CalendarContainer = styled.div`
 
 const DayCell = styled.div`
   border: 1px solid #ccc;
-  padding: 10px;
+  border-radius: 5px;
+  padding: 2px;
+  padding-top: 5px;
+  min-width: 13%;
+  min-width: 30px;
+  font-size: 1vw;
+  display: flex;
+  flex-direction: column;
+  border-color: ${(props) => (props.darkMode ? "#f1ba66" : "#5b7564")};
+  color: ${(props) => (props.darkMode ? "#F8F0E3" : "#000000")};
+  overflow-wrap: break-word;
 `;
 
 const WorkoutList = styled.ul`
+  justify-content: center;
   list-style: none;
   padding: 0;
   margin: 0;
+  padding-inline-start: 0;
 `;
 
 const WorkoutItem = styled.li`
   margin-bottom: 5px;
 `;
 
+const WorkoutItemUL = styled.li`
+  padding-inline-start: 0;
+`;
+
+const SavedWorkoutScreen = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const DateStyle = styled.div`
+  font-size: 1.5vw;
+  font-weight: bold;
+`;
+
+const EmptyCell = styled.div`
+  font-size: 1vw;
+`;
+
+const DatePickerStyle = styled.div`
+  margin-bottom: 10px;
+  width: 50%;
+  height: 10%;
+  align-self: center;
+  color: ${(props) => (props.darkMode ? "#f1ba66" : "#000000")};
+
+  @media (max-width: 768px) {
+    width: 50%; // Adjust the width for smaller screens
+  }
+`;
+
+const TitleStyle = styled.div`
+  font-size: 100%;
+  font-weight: bold;
+  color: ${(props) => (props.darkMode ? "#ffffff" : "#32533D")};
+`;
+
 const SavedWorkoutsPage = () => {
   const [savedWorkouts, setSavedWorkouts] = useState({});
-
+  const [value, setValue] = useState(dayjs());
   const { userToken } = useAuth();
-
-  console.log("check", userToken);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const fetchData = async () => {
-      let response;
       try {
-        response = await fetch("http://localhost:3001/workouts/savedWorkouts", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: userToken, //`Bearer ${userToken}`,
-          },
-        });
+        const selectedDate = value.toDate();
+        const dateRange = calculateDateRange(selectedDate);
 
-        const data = await response.json();
-        console.log("saved workout data: ", data);
-        setSavedWorkouts(data);
+        const workoutsData = {};
+
+        for (const date of dateRange) {
+          const response = await fetch(
+            `http://localhost:3001/workouts/savedWorkouts?date=${date.toISOString()}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: userToken,
+              },
+            }
+          );
+          workoutsData[date.toLocaleDateString()] = await response.json();
+        }
+
+        setSavedWorkouts(workoutsData);
       } catch (error) {
         console.error("Error fetching saved workouts:", error);
-        console.log("Response:", await response);
       }
     };
 
     fetchData();
-  }, []);
-  // Empty dependency array ensures the effect runs once on component mount
+  }, [value, userToken]);
 
-  //   return (
-  //     <div>
-  //       <h1>Your Saved Workouts</h1>
-  //       <CalendarContainer>
-  //         {savedWorkouts.map((workout) => (
-  //           <DayCell key={workout.date}>
-  //             <h2>{new Date(workout.date).toLocaleDateString()}</h2>
-  //             <WorkoutList>
-  //               {workout.exercises.map((exercise, index) => (
-  //                 <WorkoutItem key={index}>{exercise.name}</WorkoutItem>
-  //               ))}
-  //             </WorkoutList>
-  //           </DayCell>
-  //         ))}
-  //       </CalendarContainer>
-  //     </div>
-  //   );
-  // };
-
-  // Assuming savedWorkouts is an array of workout objects with a 'date' property
-  const groupedWorkouts = {};
-
-  savedWorkouts.forEach((workout) => {
-    const dateKey = new Date(workout.date);
-    const formattedDate = dateKey.toLocaleDateString();
-    const formattedTime = dateKey.toLocaleTimeString();
-
-    if (!groupedWorkouts[formattedDate]) {
-      groupedWorkouts[formattedDate] = [];
+  const calculateDateRange = (selectedDate) => {
+    const dateRange = [];
+    for (let i = -3; i <= 3; i++) {
+      const date = new Date(selectedDate);
+      date.setDate(selectedDate.getDate() + i);
+      dateRange.push(date);
     }
-
-    groupedWorkouts[formattedDate].push({
-      ...workout,
-      formattedTime,
-    });
-  });
-
-  const days = Object.keys(groupedWorkouts);
+    return dateRange;
+  };
 
   return (
-    <div>
-      <h1>Your Saved Workouts</h1>
-      <CalendarContainer>
-        {days.map((day) => (
-          <DayCell key={day}>
-            <h2>{day}</h2>
-            <WorkoutList>
-              {groupedWorkouts[day].map((workout, index) => (
-                <WorkoutItem key={index}>
-                  <p>{workout.formattedTime}</p>
-                  <p>{workout.name}</p>
-                  <ul>
-                    {workout.exercises.map((exercise, index) => (
-                      <li key={index}>{exercise.name}</li>
+    <ThemeProvider theme={getTheme(darkMode)}>
+      <SavedWorkoutScreen>
+        <TitleStyle darkMode={darkMode}>Your Saved Workouts</TitleStyle>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePickerStyle darkMode={darkMode}>
+            <DatePicker
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+              renderInput={(params) => (
+                <TextField {...params} variant="standard" fullWidth />
+              )}
+            />
+          </DatePickerStyle>
+        </LocalizationProvider>
+        <CalendarContainer>
+          {Object.keys(savedWorkouts).map((formattedDate) => {
+            const workoutsForDay = savedWorkouts[formattedDate];
+
+            return (
+              <DayCell key={formattedDate} darkMode={darkMode}>
+                <DateStyle>{formattedDate}</DateStyle>
+                {workoutsForDay.length > 0 ? (
+                  <WorkoutList>
+                    {workoutsForDay.map((workout, index) => (
+                      <WorkoutItem key={index}>
+                        <p>{new Date(workout.date).toLocaleTimeString()}</p>
+                        <p>{workout.name}</p>
+                        {workout.exercises && workout.exercises.length > 0 ? (
+                          <WorkoutItemUL>
+                            {workout.exercises.map((exercise, index) => (
+                              <li key={index}>{exercise.name}</li>
+                            ))}
+                          </WorkoutItemUL>
+                        ) : (
+                          <p>No saved exercises</p>
+                        )}
+                      </WorkoutItem>
                     ))}
-                  </ul>
-                  {/* Include other workout details as needed */}
-                </WorkoutItem>
-              ))}
-            </WorkoutList>
-          </DayCell>
-        ))}
-      </CalendarContainer>
-    </div>
+                  </WorkoutList>
+                ) : (
+                  <EmptyCell>No saved exercises</EmptyCell>
+                )}
+              </DayCell>
+            );
+          })}
+        </CalendarContainer>
+      </SavedWorkoutScreen>
+    </ThemeProvider>
   );
 };
 

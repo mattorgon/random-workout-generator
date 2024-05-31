@@ -12,6 +12,7 @@ const SaveButtonStyle = styled.button`
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 15px;
   //font-family: Jomhuria;
   &:hover {
     background-color: darkred;

@@ -1,7 +1,8 @@
 import "./App.css";
 import MainScreen from "./screens/MainScreen";
 import MyWorkouts from "./screens/MyWorkouts";
-import { DarkModeProvider } from "./context/DarkModeProvider";
+import Header from "./components/Header";
+import { DarkModeProvider, useDarkMode } from "./context/DarkModeProvider";
 import React from "react";
 import styled from "@emotion/styled";
 import BackgroundColorProvider from "./context/BackgroundColorProvider";
@@ -15,20 +16,23 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const { darkMode } = useDarkMode();
   return (
-    <DarkModeProvider>
-      <div className="App">
-        <BackgroundColorProvider>
-          {/* <MainScreen /> */}
-          <Router>
-            <Routes>
-              <Route path="/" element={<MainScreen />} />
-              <Route path="/savedWorkouts" element={<MyWorkouts />} />
-            </Routes>
-          </Router>
-        </BackgroundColorProvider>
-      </div>
-    </DarkModeProvider>
+    // <DarkModeProvider>
+    <div className="App">
+      <BackgroundColorProvider>
+        {/* <MainScreen /> */}
+
+        <Router>
+          <Header darkMode={darkMode} />
+          <Routes>
+            <Route path="/" element={<MainScreen />} />
+            <Route path="/savedWorkouts" element={<MyWorkouts />} />
+          </Routes>
+        </Router>
+      </BackgroundColorProvider>
+    </div>
+    // </DarkModeProvider>
   );
 }
 

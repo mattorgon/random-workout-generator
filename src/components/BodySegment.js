@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import ToggleableButton from "./ToggleButton";
@@ -6,13 +6,13 @@ import ToggleableButtonComponent from "./ToggleButton";
 import SubmitButton from "./SubmitButton";
 import SelectedExerciseList from "./SelectedExerciseList";
 import { getRandomExercises } from "./SelectedExercises";
-import YourWorkout from "./GenerateWorkout";
 import WorkoutCount from "./WorkoutCount";
 import pushupMan from "../assets/Pushup man no bkgd.gif";
 import { getLockedExercises } from "./SelectedExerciseList";
 import { darkModeStyles, lightModeStyles } from "../styles";
 import { useDarkMode } from "../context/DarkModeProvider";
 import SaveButton from "./SaveButton";
+import { useAuth } from "../context/AuthContext";
 
 const DisplayLength = styled.div`
   margin-top: 10px;
@@ -25,16 +25,18 @@ const BodySeg = () => {
   let exercises = [];
   let initialSliderValue = 5;
 
-  const [sliderValue, setSliderValue] = useState(initialSliderValue);
+  const { isSignedIn } = useAuth();
 
+  const [sliderValue, setSliderValue] = useState(initialSliderValue);
   //body segment toggle buttons
   const [toggledButtons, setToggledButtons] = useState([]);
-
   //exercises
   const [selectedExercises, setSelectedExercises] = useState([]);
-
   //submit button
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const bottomRef = useRef(null);
 
   const { darkMode } = useDarkMode();
 
@@ -47,21 +49,25 @@ const BodySeg = () => {
       }
     });
   };
-
+  let lockedProp;
   const handleFormSubmit = () => {
     console.log("Button clicked");
     console.log("slider val: ", sliderValue);
     const locked = getLockedExercises();
     console.log("these are locked", locked);
-    const { selectedExercises: exercises } = getRandomExercises(
-      toggledButtons,
-      sliderValue,
-      locked
-    );
+    const { selectedExercises: exercises, lockedList: pleaseLock } =
+      getRandomExercises(toggledButtons, sliderValue, locked);
+    lockedProp = pleaseLock;
+    console.log("pleeeeeeeeeeeeeeeeeeeeaaaaaaaaaaase3: ", pleaseLock);
     console.log("Exercises:", exercises);
+    setIsLoading(true);
     setSelectedExercises(exercises);
     setSubmitButtonClicked(true);
-    console.log("dark mode:", darkMode);
+    scrollToBottom();
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   };
 
   const SubtitleStyle = styled.div`
@@ -139,6 +145,17 @@ const BodySeg = () => {
     line-height: 0;
   `;
 
+  const scrollToBottom = () => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (submitButtonClicked) {
+      scrollToBottom();
+    }
+  }, [submitButtonClicked, isLoading, selectedExercises]);
   return (
     <>
       <TitleWrapper>
@@ -208,20 +225,41 @@ const BodySeg = () => {
         maxSliderValue={initialSliderValue * 2}
       />
 
-      <SubmitButton buttonText="Submit" onButtonClick={handleFormSubmit} />
+      <SubmitButton buttonText="Generate" onButtonClick={handleFormSubmit} />
 
       {submitButtonClicked && (
-        <>
-          <SelectedExerciseList selectedExercises={selectedExercises} />
-          <SaveButton
-            buttonText={"Save Workout"}
-            exercises={selectedExercises}
-          />
-        </>
+        <div>
+          {isLoading ? (
+            <>
+              <p>Working...</p>
+              <img
+                src={pushupMan}
+                alt="Loading..."
+                style={{ width: 300, height: 300 }}
+                ref={bottomRef}
+              />
+            </>
+          ) : (
+            <>
+              <SelectedExerciseList
+                selectedExercises={selectedExercises}
+                lockedList={lockedProp}
+                // onRendered={scrollToBottom}
+              />
+              {/* <div ref={bottomRef}></div> */}
+              {isSignedIn ? (
+                <SaveButton
+                  buttonText={"Save Workout"}
+                  exercises={selectedExercises}
+                  // ref={bottomRef}
+                />
+              ) : (
+                <p>Sign in to save workout!</p>
+              )}
+            </>
+          )}
+        </div>
       )}
-
-      {/* <YourWorkout selectedExercises={selectedExercises} />}
-            <SelectedExerciseList selectedExercises={selectedExercises}/> */}
     </>
   );
 };

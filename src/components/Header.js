@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
 import { darkModeStyles, lightModeStyles } from "../styles";
-import DarkToggleSwitch from "./DarkToggleSwitch";
 import SignMeUp from "./SignMeUp";
 import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../context/AuthContext";
-import UserMenuModal from "./UserMenuModal";
 import SlidingPane from "react-sliding-pane";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
 import "../styles/sliding-pane.css";
@@ -64,10 +61,11 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 90%;
+  width: 80%;
   height: 15px;
   font-size: 5px;
   margin-bottom: 1vh;
+  margin-top: 1vh;
 `;
 
 const TitleStyle = styled.div`
@@ -101,13 +99,21 @@ const Welcome = styled.div`
   margin-right: 4vw;
 `;
 
-const paneStyle = {
-  width: "20px",
-  // overlay: { width: "20px" },
-  // content: {
-  //   width: "20px",
-  // },
-};
+const LoginButtonComps = styled.div`
+  //background-color: red;
+  display: flex;
+  gap: 5px; /* Add space between the buttons */
+  align-items: stretch;
+  padding-right: 5px;
+
+  & > button {
+    flex: 1;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const Header = (props) => {
   let title = "I Pick, U Lift";
@@ -122,9 +128,17 @@ const Header = (props) => {
   const [isPaneOpen, setIsPaneOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPathname = location.pathname;
 
   const handleNavigateToSavedWorkouts = () => {
     navigate("/savedWorkouts");
+    closeUserMenu();
+  };
+
+  const handleNavigateToMainScreen = () => {
+    navigate("/");
+    closeUserMenu();
   };
 
   const openUserMenu = () => {
@@ -164,7 +178,10 @@ const Header = (props) => {
         // </>
         <Welcome>
           Welcome,{space}
-          <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
+          <span
+            onClick={openUserMenu}
+            style={{ cursor: "pointer", textDecorationLine: "underline" }}
+          >
             {username}
           </span>
           {/* <div className=".custom-width-panes"> */}
@@ -183,19 +200,30 @@ const Header = (props) => {
             <Button darkMode={darkMode} onClick={toggleDarkMode}>
               Toggle Dark Mode
             </Button>
-            <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button>
+            {/* <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button> */}
+            {/* Conditionally render the button based on the current pathname */}
+            {currentPathname === "/" && (
+              <Button onClick={handleNavigateToSavedWorkouts}>
+                My Workouts
+              </Button>
+            )}
+
+            {currentPathname === "/savedWorkouts" && (
+              <Button onClick={handleNavigateToMainScreen}>
+                Generate Workouts
+              </Button>
+            )}
+
             <Button onClick={handleSignOut}>Sign Out</Button>
-            {/* <button onClick={handleSignOut}>Sign Out</button> */}
-            <div>And I am pane content.</div>
             <br />
           </SlidingPane>
           {/* </div> */}
         </Welcome>
       ) : (
-        <div>
+        <LoginButtonComps>
           <LoginButton />
           <SignUpButton />
-        </div>
+        </LoginButtonComps>
       )}
     </HeaderStyle>
   );
