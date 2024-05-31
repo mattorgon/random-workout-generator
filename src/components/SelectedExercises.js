@@ -42,14 +42,20 @@ export const getRandomExercises = (bodySegments, count, lockedList) => {
   });
 
   const selectedExercises = [];
-
+  console.log("lockedList: ", lockedList);
   for (let i = 0; i < count; i++) {
     let e = lockedList.find((lock) => lock.index === i);
 
     if (e === undefined) {
       const selectedExercise = getRandomExercise(expandedSegments);
+
+      if (selectedExercise === null) {
+        // No more exercises available
+        break;
+      }
+
       const isExerciseInLockedList = lockedList.some(
-        (lock) => lock.exercise.name === selectedExercise.name
+        (lock) => lock.name === selectedExercise.name
       );
       if (
         selectedExercises.some((ex) => ex.name === selectedExercise.name) ||
@@ -72,7 +78,12 @@ export const getRandomExercises = (bodySegments, count, lockedList) => {
         break;
       }
     } else {
-      selectedExercises.push(e.exercise);
+      selectedExercises.push({
+        name: e.name,
+        segment: e.segment,
+        image: e.image,
+        index: e.index,
+      });
     }
   }
 

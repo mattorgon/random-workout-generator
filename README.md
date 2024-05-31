@@ -14,6 +14,7 @@ xxxx----Smooth text render----xxxx
 xxxx----Connect push/pull----xxxx
 Increase exercise list (maybe restructure?)
 xxxx----Auto-scroll on generated workout----xxxx
+bug when change workout count after locking exercise
 Deploy to live url
 
   <!-- "Biceps": ["Bicep Curls", "Hammer Curls", "Concentration Curls", "EZ Bar Curls", "Preacher Curls", "Reverse Curls", "Zottman Curls", "21s", "Spider Curls", "Dumbbell Hammer Curls"],

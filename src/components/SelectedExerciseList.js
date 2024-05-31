@@ -44,6 +44,8 @@ const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
   const [toggledLock, setToggledLock] = useState(lockedList);
   const [displayedExercises, setDisplayedExercises] = useState([]);
 
+  console.log("SELECTED EXERCISES: ", selectedExercises);
+
   // const ExerciseListStyle = styled.div`
   //   display: flex;
   //   flex-direction: row;
@@ -66,12 +68,35 @@ const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
   const handleButtonLock = (buttonText) => {
     setToggledLock((prevLock) => {
       let newLock;
+      console.log("prevlock: ", prevLock);
       if (prevLock.some((lock) => lock.exercise === buttonText)) {
         newLock = prevLock.filter((lock) => lock.exercise !== buttonText);
       } else {
-        const index = selectedExercises.indexOf(buttonText);
-        newLock = [...prevLock, { exercise: buttonText, index }];
+        // const index = selectedExercises.indexOf(buttonText);
+        // newLock = [...prevLock, { exercise: buttonText, index }];
+        const index = selectedExercises.findIndex(
+          (exercise) => exercise.name === buttonText
+        );
+        console.log("found index:", index);
+        // Ensure index is valid before adding
+        if (index !== -1) {
+          const selectedExercise = selectedExercises[index];
+          newLock = [
+            ...prevLock,
+            {
+              name: selectedExercise.name,
+              segment: selectedExercise.segment,
+              image: selectedExercise.image,
+              index: index,
+            },
+          ];
+        } else {
+          // Handle the case where the buttonText is not in selectedExercises
+          console.warn(`Exercise ${buttonText} not found in selectedExercises`);
+          newLock = [...prevLock]; // No changes
+        }
       }
+      console.log("newlock:", newLock);
       setLockedExercises(newLock);
       return newLock;
     });
@@ -139,7 +164,7 @@ const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
               exerciseName={exercise.name}
               exerciseImage={exercise.image}
               onButtonLock={handleButtonLock}
-              checked={toggledLock.some((lock) => lock.exercise === exercise)}
+              checked={toggledLock.some((lock) => lock.name === exercise.name)}
             />
           </ExerciseCardWrapper>
         ))}
