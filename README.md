@@ -12,10 +12,15 @@ xxxx----Edit sliding pane style----xxxx
 change workout card images
 xxxx----Smooth text render----xxxx
 xxxx----Connect push/pull----xxxx
-Increase exercise list (maybe restructure?)
+xxxx----Increase exercise list (maybe restructure?)----xxxx
 xxxx----Auto-scroll on generated workout----xxxx
 bug when change workout count after locking exercise
 Deploy to live url
+heroku
+graph of exercise type ratio?
+save workout ux
+sliding pane style
+
 
   <!-- "Biceps": ["Bicep Curls", "Hammer Curls", "Concentration Curls", "EZ Bar Curls", "Preacher Curls", "Reverse Curls", "Zottman Curls", "21s", "Spider Curls", "Dumbbell Hammer Curls"],
       "Chest": ["Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Flyes", "Push-ups", "Chest Dips", "Chest Press Machine", "Cable Crossover", "Pec Deck Machine", "Incline Dumbbell Press"],
