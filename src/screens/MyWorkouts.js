@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import { ThemeProvider } from "@mui/material/styles";
 import { useDarkMode } from "../context/DarkModeProvider";
 import getTheme from "../styles/theme"; // Import the theme
+import BodySegmentsPieChart from "../components/SegmentPieChart";
 
 const CalendarContainer = styled.div`
   display: grid;
@@ -143,6 +144,7 @@ const SavedWorkoutsPage = () => {
             />
           </DatePickerStyle>
         </LocalizationProvider>
+        <BodySegmentsPieChart />
         <CalendarContainer>
           {Object.keys(savedWorkouts).map((formattedDate) => {
             const workoutsForDay = savedWorkouts[formattedDate];

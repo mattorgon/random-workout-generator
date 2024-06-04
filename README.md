@@ -17,7 +17,8 @@ xxxx----Auto-scroll on generated workout----xxxx
 bug when change workout count after locking exercise
 Deploy to live url
 heroku
-graph of exercise type ratio?
+xxxx----graph of exercise type ratio?----xxxx
+style graph
 xxxx----save workout ux----xxxx
 xxxx----sliding pane style----xxxx
 

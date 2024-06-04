@@ -266,6 +266,7 @@ const BodySeg = () => {
                   <SaveButton
                     buttonText={"Save Workout"}
                     exercises={selectedExercises}
+                    isWorkoutGenerated={selectedExercises.length > 0}
                     // ref={bottomRef}
                   />
                 ) : (

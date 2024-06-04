@@ -63,6 +63,7 @@ const SaveButton = ({ buttonText, exercises, isWorkoutGenerated }) => {
   useEffect(() => {
     if (isWorkoutGenerated) {
       setIsSaved(false);
+      console.log("exercises generated: ", exercises);
     }
   }, [isWorkoutGenerated]);
 
