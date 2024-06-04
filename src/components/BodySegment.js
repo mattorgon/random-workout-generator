@@ -269,15 +269,18 @@ const BodySeg = () => {
                 lockedList={lockedProp}
                 // onRendered={scrollToBottom}
               />
-              {/* <div ref={bottomRef}></div> */}
-              {isSignedIn ? (
-                <SaveButton
-                  buttonText={"Save Workout"}
-                  exercises={selectedExercises}
-                  // ref={bottomRef}
-                />
+              {selectedExercises.length > 0 ? (
+                isSignedIn ? (
+                  <SaveButton
+                    buttonText={"Save Workout"}
+                    exercises={selectedExercises}
+                    // ref={bottomRef}
+                  />
+                ) : (
+                  <p>Sign in to save workout!</p>
+                )
               ) : (
-                <p>Sign in to save workout!</p>
+                <p>Select a body segment!</p>
               )}
             </>
           )}
