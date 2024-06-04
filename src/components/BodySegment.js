@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
-import Button from "../components/Button";
-import ToggleableButton from "./ToggleButton";
 import ToggleableButtonComponent from "./ToggleButton";
 import SubmitButton from "./SubmitButton";
 import SelectedExerciseList from "./SelectedExerciseList";
@@ -14,11 +12,6 @@ import { useDarkMode } from "../context/DarkModeProvider";
 import SaveButton from "./SaveButton";
 import { useAuth } from "../context/AuthContext";
 import { keyframes } from "@emotion/react";
-
-const DisplayLength = styled.div`
-  margin-top: 10px;
-  font-weight: bold;
-`;
 
 const BodySeg = () => {
   let titleText = "Body Segment";
@@ -252,7 +245,6 @@ const BodySeg = () => {
       />
 
       <SubmitButton buttonText="Generate" onButtonClick={handleFormSubmit} />
-
       {submitButtonClicked && (
         <div>
           {isLoading ? (
