@@ -18,8 +18,8 @@ bug when change workout count after locking exercise
 Deploy to live url
 heroku
 graph of exercise type ratio?
-save workout ux
-sliding pane style
+xxxx----save workout ux----xxxx
+xxxx----sliding pane style----xxxx
 
 
   <!-- "Biceps": ["Bicep Curls", "Hammer Curls", "Concentration Curls", "EZ Bar Curls", "Preacher Curls", "Reverse Curls", "Zottman Curls", "21s", "Spider Curls", "Dumbbell Hammer Curls"],

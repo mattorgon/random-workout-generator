@@ -43,8 +43,9 @@ const WorkoutItem = styled.li`
   margin-bottom: 5px;
 `;
 
-const WorkoutItemUL = styled.li`
+const WorkoutItemUL = styled.ul`
   padding-inline-start: 0;
+  list-style-type: none;
 `;
 
 const SavedWorkoutScreen = styled.div`
