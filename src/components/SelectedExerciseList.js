@@ -69,8 +69,8 @@ const SelectedExerciseList = ({ selectedExercises, lockedList }) => {
     setToggledLock((prevLock) => {
       let newLock;
       console.log("prevlock: ", prevLock);
-      if (prevLock.some((lock) => lock.exercise === buttonText)) {
-        newLock = prevLock.filter((lock) => lock.exercise !== buttonText);
+      if (prevLock.some((lock) => lock.name === buttonText)) {
+        newLock = prevLock.filter((lock) => lock.name !== buttonText);
       } else {
         // const index = selectedExercises.indexOf(buttonText);
         // newLock = [...prevLock, { exercise: buttonText, index }];
