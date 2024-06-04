@@ -2,29 +2,35 @@ const styles = {
   header: {},
 };
 // styles.js
+const colors = {
+  yellow: "#f1ba66",
+  green: "#32533D",
+  opaqueGreen: "#5b7564",
+  offWhite: "#F8F0E3",
+};
 export const lightModeStyles = {
   backgroundColor: "white",
   color: "black",
   header: {
-    backgroundColor: "#32533D",
-    color: "#F8F0E3",
+    backgroundColor: colors.green,
+    color: colors.offWhite,
   },
   mainScreen: {
     backgroundColor: "white",
     color: "white",
   },
   toggleButton: {
-    checked_backgroundColor: "#32533DCC",
+    checked_backgroundColor: colors.opaqueGreen,
     checked_color: "white",
-    hover_backgroundColor: "#f1ba66",
+    hover_backgroundColor: colors.yellow,
     backgroundColor: "white",
-    color: "#5B7564",
+    color: colors.opaqueGreen,
     border: "1px solid #5b7564",
     border_radius: "6px",
   },
   lockButton: {
-    backgroundColor: "#5b7564",
-    color: "#F8F0E3",
+    backgroundColor: colors.opaqueGreen,
+    color: colors.offWhite,
     border: "none",
     border_radius: "6px;",
   },
@@ -33,24 +39,34 @@ export const lightModeStyles = {
     border: "solid",
   },
   slider: {
-    backgroundColor: "#32533D",
+    backgroundColor: colors.green,
     thumb: {
-      backgroundColor: "#F1BA66",
-      border: "#32533D",
+      backgroundColor: colors.yellow,
+      border: colors.green,
     },
     hashMark: {
-      color: "#32533D",
+      color: colors.green,
     },
   },
   titleText: {
-    color: "#32533D",
+    color: colors.green,
+  },
+  slidingPane: {
+    header: {
+      backgroundColor: colors.green,
+      color: colors.offWhite,
+    },
+    close: {
+      color: colors.offWhite,
+    },
+    backgroundColor: "white",
   },
 };
 
 export const darkModeStyles = {
   header: {
     backgroundColor: "#1C1C1C",
-    color: "#E8E8E8",
+    color: colors.offWhite,
   },
 
   backgroundColor: "black",
@@ -58,10 +74,10 @@ export const darkModeStyles = {
 
   mainScreen: {
     backgroundColor: "#484848",
-    color: "#F8F0E3",
+    color: colors.offWhite,
   },
   toggleButton: {
-    checked_backgroundColor: "#5B7564",
+    checked_backgroundColor: colors.opaqueGreen,
     checked_color: "white",
     hover_backgroundColor: "#1C1C1C",
     backgroundColor: "#696969",
@@ -71,7 +87,7 @@ export const darkModeStyles = {
   },
   lockButton: {
     backgroundColor: "#696969",
-    color: "#F8F0E3",
+    color: colors.offWhite,
     border: "2px solid #F1BA66",
     border_radius: "6px;",
   },
@@ -80,16 +96,26 @@ export const darkModeStyles = {
     border: "2px solid #F1BA66",
   },
   slider: {
-    backgroundColor: "#F8F0E3",
+    backgroundColor: colors.offWhite,
     thumb: {
-      backgroundColor: "#F1BA66",
-      border: "#F8F0E3",
+      backgroundColor: colors.yellow,
+      border: colors.offWhite,
     },
     hashMark: {
-      color: "#F8F0E3",
+      color: colors.offWhite,
     },
   },
   titleText: {
-    color: "#F8F0E3",
+    color: colors.offWhite,
+  },
+  slidingPane: {
+    header: {
+      backgroundColor: "black",
+      color: colors.offWhite,
+    },
+    close: {
+      color: colors.yellow,
+    },
+    backgroundColor: "#484848",
   },
 };
