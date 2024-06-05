@@ -1,144 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { useDarkMode } from "../context/DarkModeProvider";
 import { darkModeStyles, lightModeStyles } from "../styles";
-import SignMeUp from "./SignMeUp";
 import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../context/AuthContext";
 import SlidingPane from "react-sliding-pane";
 import { useNavigate, useLocation } from "react-router-dom";
-// import "react-sliding-pane/dist/react-sliding-pane.css";
 import "../styles/parent-slide-pane.css";
 import "../styles/sliding-pane.css";
+import {
+  PaneButton,
+  HeaderStyle,
+  HeaderUnderline,
+  HeaderTitleWrapper,
+  HeaderTitleStyle,
+  Welcome,
+  LoginButtonComps,
+} from "../styles/ComponentStyles";
 
-const HeaderStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between; /* Align children to the start and end */
-  padding: 0 20px; /* Add some padding for better spacing */
-  background-color: ${(props) =>
-    props.darkMode
-      ? darkModeStyles.header.backgroundColor
-      : lightModeStyles.header.backgroundColor};
-  color: ${(props) =>
-    props.darkMode
-      ? darkModeStyles.header.color
-      : lightModeStyles.header.color};
-  line-height: 0; /* Adjust line-height to remove gap */
-  margin-bottom: 0; /* Reset margin-bottom */
-  padding: 0; /* Reset padding */
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 5px;
-`;
-
-const Underline = styled.div`
-  border-radius: 1.5px;
-  width: 100px;
-  height: 2px;
-  background-color: #f1ba66;
-  margin-top: 6px;
-`;
-
-const TitleWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 0;
-`;
-
-const Button = styled.button`
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 80%;
-  height: 15px;
-  font-size: 5px;
-  margin-bottom: 1vh;
-  margin-top: 1vh;
-  &:hover {
-    background-color: ${(props) =>
-      props.darkMode
-        ? lightModeStyles.toggleButton.hover_backgroundColor
-        : lightModeStyles.toggleButton.hover_backgroundColor};
-  }
-`;
-
-const TitleStyle = styled.div`
-  font-weight: bold;
-  font-size: 15px;
-  background-color: rgba(0, 0, 0, 0);
-
-  color: ${(props) =>
-    props.darkMode
-      ? darkModeStyles.titleText.color
-      : darkModeStyles.titleText.color};
-  display: inline;
-  z-index: 2;
-  position: relative;
-
-  line-height: 0; /* Adjust line-height to remove gap */
-  margin-bottom: 0; /* Reset margin-bottom */
-  padding: 0px; /* Reset padding */
-  margin-top: 10px;
-`;
-
-const SignedIn = styled.div`
-  background-color: red;
-`;
-
-const Welcome = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 4vw;
-`;
-
-const LoginButtonComps = styled.div`
-  display: flex;
-  gap: 5px; /* Add space between the buttons */
-  align-items: stretch;
-  padding-right: 5px;
-
-  & > button {
-    flex: 1;
-    max-width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const StyledSlidingPane = styled(SlidingPane)`
-  .slide-pane__header {
-    background-color: ${(props) =>
-      props.darkMode
-        ? darkModeStyles.slidingPane.header.backgroundColor
-        : lightModeStyles.slidingPane.header.backgroundColor};
-    color: ${(props) =>
-      props.darkMode
-        ? darkModeStyles.slidingPane.header.color
-        : lightModeStyles.slidingPane.header.color};
-  }
-
-  .slide-pane__content {
-    background-color: ${(props) =>
-      props.darkMode
-        ? darkModeStyles.slidingPane.backgroundColor
-        : lightModeStyles.slidingPane.backgroundColor};
-  }
-
-  .slide-pane__close {
-    color: ${(props) =>
-      props.darkMode
-        ? darkModeStyles.slidingPane.close.color
-        : lightModeStyles.slidingPane.close.color};
-  }
-`;
-
-const Header = (props) => {
+const Header = () => {
   let title = "I Pick, U Lift";
   let space = "\u00A0";
 
@@ -175,26 +56,19 @@ const Header = (props) => {
     setIsPaneOpen(false); // Close the modal if onClose is a function
   };
 
-  useEffect(() => {
-    console.log("username: ", username);
-  }, [isSignedIn]);
+  // useEffect(() => {
+  //   console.log("username: ", username);
+  // }, [isSignedIn]);
 
   return (
     <HeaderStyle darkMode={darkMode}>
-      <TitleWrapper>
-        <TitleStyle darkMode={darkMode}>{title}</TitleStyle>
+      <HeaderTitleWrapper>
+        <HeaderTitleStyle darkMode={darkMode}>{title}</HeaderTitleStyle>
 
-        <Underline />
-      </TitleWrapper>
+        <HeaderUnderline />
+      </HeaderTitleWrapper>
 
       {isSignedIn ? (
-        // <>
-        //   Welcome,{" "}
-        //   <span onClick={openUserMenu} style={{ cursor: "pointer" }}>
-        //     {username}
-        //   </span>
-        //   <UserMenuModal isOpen={isUserMenuOpen} onClose={closeUserMenu} />
-        // </>
         <Welcome>
           Welcome,{space}
           <span
@@ -203,7 +77,6 @@ const Header = (props) => {
           >
             {username}
           </span>
-          {/* <div className=".custom-width-panes"> */}
           <StyledSlidingPane
             className="my-custom-slide-pane custom-width-panes slide-pane_from_right"
             isOpen={isPaneOpen}
@@ -211,40 +84,24 @@ const Header = (props) => {
             onRequestClose={() => setIsPaneOpen(false)}
             darkMode={darkMode}
           >
-            {/* <SlidingPane
-            className="my-custom-slide-pane.custom-width-panes.slide-pane_from_right my-custom-slide-pane custom-width-panes"
-            // overlayClassName="some-custom-overlay-class"
-            isOpen={isPaneOpen}
-            // width="40%"
-            title={username}
-            // subtitle="Optional subtitle."
-            onRequestClose={() => {
-              // triggered on "<" on left top click or on outside click
-              setIsPaneOpen(false);
-            }}
-          > */}
-            <Button darkMode={darkMode} onClick={toggleDarkMode}>
+            <PaneButton darkMode={darkMode} onClick={toggleDarkMode}>
               Toggle Dark Mode
-            </Button>
-            {/* <Button onClick={handleNavigateToSavedWorkouts}>My Workouts</Button> */}
-            {/* Conditionally render the button based on the current pathname */}
+            </PaneButton>
             {currentPathname === "/" && (
-              <Button onClick={handleNavigateToSavedWorkouts}>
+              <PaneButton onClick={handleNavigateToSavedWorkouts}>
                 My Workouts
-              </Button>
+              </PaneButton>
             )}
 
             {currentPathname === "/savedWorkouts" && (
-              <Button onClick={handleNavigateToMainScreen}>
+              <PaneButton onClick={handleNavigateToMainScreen}>
                 Generate Workouts
-              </Button>
+              </PaneButton>
             )}
 
-            <Button onClick={handleSignOut}>Sign Out</Button>
+            <PaneButton onClick={handleSignOut}>Sign Out</PaneButton>
             <br />
-            {/* </SlidingPane> */}
           </StyledSlidingPane>
-          {/* </div> */}
         </Welcome>
       ) : (
         <LoginButtonComps>
@@ -257,3 +114,30 @@ const Header = (props) => {
 };
 
 export default Header;
+
+const StyledSlidingPane = styled(SlidingPane)`
+  .slide-pane__header {
+    background-color: ${(props) =>
+      props.darkMode
+        ? darkModeStyles.slidingPane.header.backgroundColor
+        : lightModeStyles.slidingPane.header.backgroundColor};
+    color: ${(props) =>
+      props.darkMode
+        ? darkModeStyles.slidingPane.header.color
+        : lightModeStyles.slidingPane.header.color};
+  }
+
+  .slide-pane__content {
+    background-color: ${(props) =>
+      props.darkMode
+        ? darkModeStyles.slidingPane.backgroundColor
+        : lightModeStyles.slidingPane.backgroundColor};
+  }
+
+  .slide-pane__close {
+    color: ${(props) =>
+      props.darkMode
+        ? darkModeStyles.slidingPane.close.color
+        : lightModeStyles.slidingPane.close.color};
+  }
+`;

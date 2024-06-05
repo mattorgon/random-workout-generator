@@ -1,6 +1,3 @@
-const styles = {
-  header: {},
-};
 // styles.js
 const colors = {
   yellow: "#f1ba66",

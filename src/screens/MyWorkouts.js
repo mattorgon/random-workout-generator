@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "@emotion/styled";
 import { useAuth } from "../context/AuthContext";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -10,87 +9,19 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useDarkMode } from "../context/DarkModeProvider";
 import getTheme from "../styles/theme"; // Import the theme
 import BodySegmentsPieChart from "../components/SegmentPieChart";
-
-const CalendarContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-`;
-
-const DayCell = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 2px;
-  padding-top: 5px;
-  min-width: 13%;
-  min-width: 30px;
-  font-size: 1vw;
-  display: flex;
-  flex-direction: column;
-  border-color: ${(props) => (props.darkMode ? "#f1ba66" : "#5b7564")};
-  color: ${(props) => (props.darkMode ? "#F8F0E3" : "#000000")};
-  overflow-wrap: break-word;
-`;
-
-const WorkoutList = styled.ul`
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  padding-inline-start: 0;
-`;
-
-const WorkoutItem = styled.li`
-  margin-bottom: 5px;
-`;
-
-const WorkoutItemUL = styled.ul`
-  padding-inline-start: 0;
-  list-style-type: none;
-`;
-
-const SavedWorkoutScreen = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const DateStyle = styled.div`
-  font-size: 1.5vw;
-  font-weight: bold;
-`;
-
-const EmptyCell = styled.div`
-  font-size: 1vw;
-`;
-
-const DatePickerStyle = styled.div`
-  margin-bottom: 10px;
-  width: 50%;
-  height: 10%;
-  align-self: center;
-  color: ${(props) => (props.darkMode ? "#f1ba66" : "#000000")};
-
-  @media (max-width: 768px) {
-    width: 50%; // Adjust the width for smaller screens
-  }
-`;
-
-const TitleStyle = styled.div`
-  font-size: 100%;
-  font-weight: bold;
-  color: ${(props) => (props.darkMode ? "#ffffff" : "#32533D")};
-`;
-
-const ChartContainer = styled.div`
-  width: 100%;
-  height: 200px;
-  margin-bottom: 15px;
-  // display: flex;
-  // justify-content: center;
-  // align-content: center;
-  // align-items: center;
-`;
+import {
+  CalendarContainer,
+  DayCell,
+  WorkoutList,
+  WorkoutItem,
+  WorkoutItemUL,
+  SavedWorkoutScreen,
+  DateStyle,
+  EmptyCell,
+  DatePickerStyle,
+  MyWorkoutsTitleStyle,
+  ChartContainer,
+} from "../styles/ComponentStyles";
 
 const CustomTextField = (props) => {
   return (
@@ -153,16 +84,11 @@ const SavedWorkoutsPage = () => {
   return (
     <ThemeProvider theme={getTheme(darkMode)}>
       <SavedWorkoutScreen>
-        <TitleStyle darkMode={darkMode}>Your Saved Workouts</TitleStyle>
+        <MyWorkoutsTitleStyle darkMode={darkMode}>
+          Your Saved Workouts
+        </MyWorkoutsTitleStyle>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePickerStyle darkMode={darkMode}>
-            {/* <DatePicker
-              value={value}
-              onChange={(newValue) => setValue(newValue)}
-              renderInput={(params) => (
-                <TextField {...params} variant="standard" fullWidth />
-              )}
-            /> */}
             <DatePicker
               value={value}
               onChange={(newValue) => setValue(newValue)}

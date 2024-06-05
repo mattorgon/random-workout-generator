@@ -1,37 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { useDarkMode } from "../context/DarkModeProvider";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-
-const Form = styled.form`
-  max-width: 400px;
-  margin: auto;
-`;
-
-const Label = styled.label`
-  display: block;
-  font-size: 60%;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  margin-top: 0px;
-`;
-
-const Button = styled.button`
-  background-color: #3498db;
-  color: #fff;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
-`;
-
-const UsernameTaken = styled.div`
-  // height: 20px;
-  width: 100px;
-  background-color: red;
-  color: black;
-`;
+import {
+  Form,
+  Label,
+  Input,
+  Button,
+  UsernameTaken,
+} from "../styles/ComponentStyles";
 
 const SignMeUp = ({ formData, setFormData }) => {
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
@@ -109,11 +84,9 @@ const SignMeUp = ({ formData, setFormData }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("formdata: ", formData);
-  }, [handleChange]);
-
-  const { darkMode } = useDarkMode();
+  // useEffect(() => {
+  //   console.log("formdata: ", formData);
+  // }, [handleChange]);
 
   return (
     <Form onSubmit={handleSubmit}>

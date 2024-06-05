@@ -19,7 +19,7 @@ const getRandomExercise = (bodySegments) => {
     )
     .filter((exercise) => exercise);
 
-  console.log("exercises:", exercises);
+  // console.log("exercises:", exercises);
 
   if (exercises.length === 0) {
     console.log("No exercises found for the selected body segments.");
@@ -42,7 +42,7 @@ export const getRandomExercises = (bodySegments, count, lockedList) => {
   });
 
   const selectedExercises = [];
-  console.log("lockedList: ", lockedList);
+  // console.log("lockedList: ", lockedList);
   for (let i = 0; i < count; i++) {
     let e = lockedList.find((lock) => lock.index === i);
 

@@ -1,40 +1,11 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import Modal from "react-modal";
 import SignMeUp from "./SignMeUp";
-
-const SignUpButtonStyled = styled.button`
-  background-color: #3498db;
-  color: #fff;
-  padding: 0px 10px;
-  border: none;
-  cursor: pointer;
-  //z-index: 2;
-  border-radius: 5px;
-  font-size: 0.5em;
-  white-space: nowrap;
-`;
-
-const ModalContent = styled.div`
-  padding: 20px;
-  z-index: 3;
-  width: 50%;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1px; /* Adjust top position as needed */
-  right: 10px; /* Adjust right position as needed */
-  margin-top: 10px;
-  color: darkgrey;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  &:hover {
-    background-color: darkgrey;
-    color: black;
-  }
-`;
+import {
+  SignUpButtonStyled,
+  ModalContent,
+  CloseButton,
+} from "../styles/ComponentStyles";
 
 const SignUpButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,30 +69,6 @@ const SignUpButton = () => {
             outline: "none", // Remove outline
           },
         }}
-        // style={{
-        //   overlay: {
-        //     display: "flex",
-        //     alignItems: "center",
-        //     justifyContent: "center",
-        //   },
-        //   content: {
-        //     position: "fixed",
-        //     display: "flex",
-        //     justifyContent: "center",
-        //     top: "50%",
-        //     left: "50%",
-        //     right: "auto",
-        //     bottom: "auto",
-        //     transform: "translate(-50%, -50%)",
-        //     width: "20%",
-        //     height: "40%",
-        //     maxHeight: "80%",
-        //     overflow: "auto",
-        //     background: "#fff",
-        //     border: "1px solid #ccc",
-        //     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        //   },
-        // }}
       >
         <ModalContent>
           <CloseButton onClick={closeModal}>X</CloseButton>
