@@ -253,6 +253,7 @@ export const LockButton = styled.button`
 
   /* Dynamic font size based on text length */
   font-size: ${(props) => props.fontSize}px;
+  overflow-wrap: break-word;
 `;
 
 export const ExerciseGif = styled.img`

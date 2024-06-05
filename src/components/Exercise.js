@@ -46,9 +46,12 @@ const ExerciseCard = ({
     const maxHeight = 25;
     const scaleFactor = maxWidth / textLength;
     const heightScale = maxHeight / textHeight;
-    const adjustedFontSize = Math.floor(fontSize * scaleFactor);
-    setFontSize(
-      Math.min(12, Math.min(adjustedFontSize, fontSize * heightScale))
+    const adjustedFontSize = Math.floor(12 * scaleFactor);
+    // setFontSize(
+    //   Math.min(12, Math.min(adjustedFontSize, fontSize * heightScale))
+    // );
+    setFontSize((prevFontSize) =>
+      Math.min(12, Math.min(adjustedFontSize, prevFontSize * heightScale))
     );
   }, [exerciseName]);
 
