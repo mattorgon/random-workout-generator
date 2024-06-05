@@ -5,8 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { DarkModeProvider } from "./context/DarkModeProvider";
+import Modal from "react-modal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+Modal.setAppElement("#root");
 root.render(
   <React.StrictMode>
     <AuthProvider>

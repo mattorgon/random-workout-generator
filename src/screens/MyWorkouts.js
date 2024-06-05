@@ -82,6 +82,27 @@ const TitleStyle = styled.div`
   color: ${(props) => (props.darkMode ? "#ffffff" : "#32533D")};
 `;
 
+const ChartContainer = styled.div`
+  width: 100%;
+  height: 200px;
+  margin-bottom: 15px;
+  // display: flex;
+  // justify-content: center;
+  // align-content: center;
+  // align-items: center;
+`;
+
+const CustomTextField = (props) => {
+  return (
+    <TextField
+      {...props}
+      variant="standard" // Keep the desired variant
+      fullWidth // Maintain full width styling
+      // Add any additional styles or props here
+    />
+  );
+};
+
 const SavedWorkoutsPage = () => {
   const [savedWorkouts, setSavedWorkouts] = useState({});
   const [value, setValue] = useState(dayjs());
@@ -135,16 +156,23 @@ const SavedWorkoutsPage = () => {
         <TitleStyle darkMode={darkMode}>Your Saved Workouts</TitleStyle>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePickerStyle darkMode={darkMode}>
-            <DatePicker
+            {/* <DatePicker
               value={value}
               onChange={(newValue) => setValue(newValue)}
               renderInput={(params) => (
                 <TextField {...params} variant="standard" fullWidth />
               )}
+            /> */}
+            <DatePicker
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+              textField={(params) => <CustomTextField {...params} />} // Use custom TextField
             />
           </DatePickerStyle>
         </LocalizationProvider>
-        <BodySegmentsPieChart />
+        <ChartContainer>
+          <BodySegmentsPieChart darkMode={darkMode} />
+        </ChartContainer>
         <CalendarContainer>
           {Object.keys(savedWorkouts).map((formattedDate) => {
             const workoutsForDay = savedWorkouts[formattedDate];

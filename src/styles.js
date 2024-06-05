@@ -61,6 +61,14 @@ export const lightModeStyles = {
     },
     backgroundColor: "white",
   },
+  pieChart: {
+    title: {
+      color: "black",
+    },
+    legend: {
+      color: "black",
+    },
+  },
 };
 
 export const darkModeStyles = {
@@ -117,5 +125,13 @@ export const darkModeStyles = {
       color: colors.yellow,
     },
     backgroundColor: "#484848",
+  },
+  pieChart: {
+    title: {
+      color: colors.offWhite,
+    },
+    legend: {
+      color: colors.offWhite,
+    },
   },
 };
