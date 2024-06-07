@@ -1,7 +1,7 @@
 {
   "exercises": {
     "Back": {
-      "image": "/assets/back_test.jpg",
+      "image": "/assets/Back.svg",
       "exercises": [
         "Pull-ups",
         "Lat Pulldowns",
@@ -57,7 +57,7 @@
     },
 
     "Biceps": {
-      "image": "/assets/biceps_test.jpg",
+      "image": "/assets/Biceps.svg",
       "exercises": [
         "Bicep Curls",
         "Hammer Curls",
@@ -112,7 +112,7 @@
     },
 
     "Chest": {
-      "image": "/assets/chest_test.jpg",
+      "image": "/assets/Chest.svg",
       "exercises": [
         "Bench Press",
         "Incline Bench Press",
@@ -168,7 +168,7 @@
     },
 
     "Triceps": {
-      "image": "/assets/triceps_test.jpg",
+      "image": "/assets/Triceps.svg",
       "exercises": [
         "Tricep Dips",
         "Skull Crushers",
@@ -224,7 +224,7 @@
     },
 
     "Legs": {
-      "image": "/assets/legs_test.jpg",
+      "image": "/assets/Legs.svg",
       "exercises": [
         "Squats",
         "Deadlifts",
@@ -280,7 +280,7 @@
     },
 
     "Shoulders": {
-      "image": "/assets/shoulders_test.jpg",
+      "image": "/assets/Shoulders.svg",
       "exercises": [
         "Overhead Press",
         "Front Raises",
@@ -334,7 +334,7 @@
       ]
     },
     "Core": {
-      "image": "/assets/core_test.jpg",
+      "image": "/assets/Core.svg",
       "exercises": [
         "Plank",
         "Side Plank",
@@ -390,7 +390,7 @@
     },
 
     "Cardio": {
-      "image": "/assets/cardio_test.jpg",
+      "image": "/assets/Cardio.svg",
       "exercises": [
         "Running",
         "Cycling",
